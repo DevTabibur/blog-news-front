@@ -7,10 +7,10 @@ import ThemeConfig from 'theme'
 import GlobalStyles from 'theme/globalStyles';
 
 // components
-import { SettingsProvider } from 'contexts/SettingsContext';
-import { CollapseDrawerProvider } from 'contexts/CollapseDrawerContext';
+import { SettingsProvider } from '../src/contexts/SettingsContext';
+import { CollapseDrawerProvider } from '../src/contexts/CollapseDrawerContext';
 import createEmotionCache from '@/utils/CreateEmotionCache';
-import { ContextProvider } from 'contexts/dataProviderContext';
+import { ContextProvider } from '../src/contexts/dataProviderContext';
 import Layout from '@/components/_App/Layout';
 import { Provider } from 'react-redux'
 import { useStore } from '../store'
@@ -38,7 +38,6 @@ import '@/styles/style.css';
 import '@/styles/responsive.css'
 // Global RTL Style
 import '@/styles/rtl.css'
-import { AuthContext } from 'contexts/JWTContext';
 
 
 
