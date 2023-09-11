@@ -9,7 +9,7 @@ import DashboardSidebar from "../dashboard/DashboardSidebar";
 import useCollapseDrawer from "hooks/useCollapseDrawer";
 import { useRouter } from "next/router";
 import LoadingScreen from "../LoadingScreen";
-import AuthGuard from "Guards/AuthGuard";
+import AuthGuard from "../../src/Guards/AuthGuard";
 // ----------------------------------------------------------------------
 
 const APP_BAR_MOBILE = 64;

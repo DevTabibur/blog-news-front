@@ -1,5 +1,5 @@
 import DashboardLayout from "@/components/DashboardLayout/DashboardLayout"
-import RoleBasedGuard from "Guards/RoleBasedGuard"
+import RoleBasedGuard from "../../src/Guards/RoleBasedGuard"
 
 const FAQPage = () => {
     return (

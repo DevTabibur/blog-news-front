@@ -22,7 +22,7 @@ import {
     BlogPostCommentForm
 } from 'components/_dashboard/blog';
 import { useDispatch, useSelector } from 'react-redux';
-import RoleBasedGuard from 'Guards/RoleBasedGuard';
+import RoleBasedGuard from '../../src/Guards/RoleBasedGuard';
 import DashboardLayout from '@/components/DashboardLayout/DashboardLayout';
 
 

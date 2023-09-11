@@ -3,9 +3,7 @@ import { PATH_DASHBOARD } from 'routes/paths';
 // components
 import Label from '../Label';
 import SvgIconStyle from '../SvgIconStyle';
-import RoleBasedGuard from 'Guards/RoleBasedGuard';
 import UserList from 'pages/dashboard/user/list';
-import AuthGuard from 'Guards/AuthGuard';
 import { ContextData } from 'contexts/dataProviderContext';
 import { useContext } from 'react';
 // import DashboardIcon from '@mui/icons-material/Dashboard';

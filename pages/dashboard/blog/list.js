@@ -19,7 +19,7 @@ import HeaderBreadcrumbs from 'components/HeaderBreadcrumbs';
 import { BlogPostCard, BlogPostsSort, BlogPostsSearch } from 'components/_dashboard/blog';
 import { useDispatch, useSelector } from 'react-redux';
 import DashboardLayout from '@/components/DashboardLayout/DashboardLayout';
-import RoleBasedGuard from 'Guards/RoleBasedGuard';
+import RoleBasedGuard from '../../src/Guards/RoleBasedGuard';
 
 // ----------------------------------------------------------------------
 

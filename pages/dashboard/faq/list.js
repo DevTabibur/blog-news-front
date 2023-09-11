@@ -2,7 +2,7 @@ import DashboardLayout from "@/components/DashboardLayout/DashboardLayout"
 import HeaderBreadcrumbs from "@/components/HeaderBreadcrumbs"
 import Page from "@/components/Page"
 import { Button, Container } from "@mui/material"
-import RoleBasedGuard from "Guards/RoleBasedGuard"
+import RoleBasedGuard from "../../src/Guards/RoleBasedGuard"
 import { PATH_DASHBOARD } from "routes/paths"
 import { Icon } from '@iconify/react';
 import plusFill from '@iconify/icons-eva/plus-fill';

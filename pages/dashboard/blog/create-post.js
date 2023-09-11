@@ -9,7 +9,7 @@ import HeaderBreadcrumbs from 'components/HeaderBreadcrumbs';
 import { BlogNewPostForm } from '@/components/_dashboard/blog';
 import DashboardLayout from '@/components/DashboardLayout/DashboardLayout';
 import Page from '@/components/Page';
-import RoleBasedGuard from 'Guards/RoleBasedGuard';
+import RoleBasedGuard from '../../src/Guards/RoleBasedGuard';
 
 
 

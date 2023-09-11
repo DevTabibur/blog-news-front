@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import DigitalAgency from './digital-agency';
-import Navbar from '@/components/_App/Navbar';
 import LoadingScreen from '@/components/LoadingScreen';
 
 const Index = () => {
@@ -18,7 +16,9 @@ const Index = () => {
             {isLoading ? (
                 <LoadingScreen />
             ) : (
-                <DigitalAgency />
+                <>
+                    <h1>Hello This is Index.js</h1>
+                </>
             )}
         </>
     )
