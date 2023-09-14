@@ -12,8 +12,6 @@ import { CollapseDrawerProvider } from '../src/contexts/CollapseDrawerContext';
 import createEmotionCache from '@/utils/CreateEmotionCache';
 import { ContextProvider } from '../src/contexts/dataProviderContext';
 import Layout from '@/components/_App/Layout';
-import { Provider } from 'react-redux'
-import { useStore } from '../store'
 import ThemePrimaryColor from '@/components/ThemePrimaryColor'
 // import ThemeLocalization from '@/components/ThemeLocalization'
 import RtlLayout from '@/components/RtlLayout';
@@ -46,7 +44,6 @@ const clientSideEmotionCache = createEmotionCache()
 
 export default function App(props) {
 
-    const store = useStore(props.initialReduxState)
     const { Component, emotionCache = clientSideEmotionCache, pageProps } = props
 
     return (
@@ -69,12 +66,10 @@ export default function App(props) {
                                         <NotistackProvider>
                                             <GlobalStyles />
                                             <ProgressBarStyle />
-                                            <Provider store={store}>
-                                                <Layout />
+                                            <Layout />
 
 
-                                                <Component {...pageProps} />
-                                            </Provider>
+                                            <Component {...pageProps} />
                                         </NotistackProvider>
                                     </RtlLayout>
                                 </ThemePrimaryColor>
