@@ -3,13 +3,13 @@ import { Container } from '@mui/material';
 // routes
 import { PATH_DASHBOARD } from 'routes/paths';
 // hooks
-import useSettings from 'hooks/useSettings';
 //components
 import HeaderBreadcrumbs from 'components/HeaderBreadcrumbs';
 import { BlogNewPostForm } from '@/components/_dashboard/blog';
 import DashboardLayout from '@/components/DashboardLayout/DashboardLayout';
+import useSettings from 'src/hooks/useSettings';
+import RoleBasedGuard from 'src/Guards/RoleBasedGuard';
 import Page from '@/components/Page';
-import RoleBasedGuard from '../../src/Guards/RoleBasedGuard';
 
 
 

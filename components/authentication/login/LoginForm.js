@@ -12,7 +12,6 @@ import { LoadingButton } from '@mui/lab';
 // routes
 import { PATH_AUTH } from 'routes/paths';
 // hooks
-import useAuth from '../../../hooks/useAuth';
 //
 import MIconButton from '../../@material-extend/MIconButton';
 import { toast } from 'react-hot-toast';

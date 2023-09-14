@@ -4,7 +4,7 @@ import Link from "next/link";
 import * as Icon from "react-feather";
 import { useSelector } from "react-redux";
 import { toast } from "react-hot-toast";
-import { ContextData } from "contexts/dataProviderContext";
+import { ContextData } from "src/contexts/dataProviderContext";
 
 const Navbar = () => {
   const { currentlyLoggedIn } = useContext(ContextData)

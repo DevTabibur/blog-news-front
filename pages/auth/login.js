@@ -5,7 +5,6 @@ import { Box, Card, Stack, Link, Alert, Tooltip, Container, Typography, Button }
 // routes
 import { PATH_AUTH } from 'routes/paths';
 // hooks
-import useAuth from '../../hooks/useAuth';
 // layouts
 import AuthLayout from '@/components/layouts/AuthLayout';
 
@@ -46,11 +45,10 @@ const ContentStyle = styled('div')(({ theme }) => ({
 // ----------------------------------------------------------------------
 
 export default function Login() {
-  const { method, login } = useAuth();
 
   const handleLoginAuth0 = async () => {
     try {
-      await login();
+      // await login();
     } catch (error) {
       console.error(error);
     }
@@ -84,24 +82,18 @@ export default function Login() {
               <Typography sx={{ color: 'text.secondary' }}>Enter your details below.</Typography>
             </Box>
 
-            <Tooltip title={capitalCase(method)}>
+            {/* <Tooltip title={capitalCase(method)}>
               <Box component="img" src={`/static/auth/ic_${method}.png`} sx={{ width: 32, height: 32 }} />
-            </Tooltip>
+            </Tooltip> */}
           </Stack>
 
-          {/* {method === 'firebase' && <AuthFirebaseSocials />} */}
 
           <Alert severity="info" sx={{ mb: 3 }}>
             Use email : <strong>demo@gmail.com</strong> / password :<strong>&nbsp;demo1234</strong>
           </Alert>
 
-          {method !== 'auth0' ? (
-            <LoginForm />
-          ) : (
-            <Button fullWidth size="large" type="submit" variant="contained" onClick={handleLoginAuth0}>
-              Login
-            </Button>
-          )}
+          <LoginForm />
+
 
           <MHidden width="smUp">
             <Typography variant="body2" align="center" sx={{ mt: 3 }}>

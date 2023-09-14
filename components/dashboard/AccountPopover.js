@@ -21,8 +21,8 @@ import { PATH_DASHBOARD } from 'routes/paths';
 import MIconButton from 'components/@material-extend/MIconButton';
 // import MyAvatar from 'components/MyAvatar';
 import MenuPopover from 'components/MenuPopover';
-import { ContextData } from 'contexts/dataProviderContext';
 import { toast } from 'react-hot-toast';
+import { ContextData } from 'src/contexts/dataProviderContext';
 
 // ----------------------------------------------------------------------
 

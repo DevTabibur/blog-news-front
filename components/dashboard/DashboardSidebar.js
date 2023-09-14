@@ -13,7 +13,6 @@ import { Box, Link, Stack, Button, Drawer, Tooltip, Typography, CardActionArea, 
 // hooks
 
 // import useAuth from '../../hooks/useAuth';
-import useCollapseDrawer from 'hooks/useCollapseDrawer';
 // components
 import Scrollbar from '../Scrollbar';
 import MyAvatar from '../MyAvatar';
@@ -22,7 +21,8 @@ import logoImg from 'assets/images/logo.svg'
 import NavSection from '../NavSection';
 import sidebarConfig from './SidebarConfig';
 import { getUserById } from 'apis/user.api';
-import { ContextData } from 'contexts/dataProviderContext';
+import { ContextData } from 'src/contexts/dataProviderContext';
+import useCollapseDrawer from 'src/hooks/useCollapseDrawer';
 
 // ----------------------------------------------------------------------
 

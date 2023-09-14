@@ -1,7 +1,6 @@
 import * as Yup from 'yup';
 import { useState } from 'react';
 import { Icon } from '@iconify/react';
-import { useSnackbar } from 'notistack';
 import { useFormik, Form, FormikProvider } from 'formik';
 import eyeFill from '@iconify/icons-eva/eye-fill';
 import closeFill from '@iconify/icons-eva/close-fill';
@@ -10,19 +9,16 @@ import eyeOffFill from '@iconify/icons-eva/eye-off-fill';
 import { Stack, TextField, IconButton, InputAdornment, Alert } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 // hooks
-import useIsMountedRef from '../../../hooks/useIsMountedRef';
 // components
-import MIconButton from '@/components/@material-extend/MIconButton';
 import toast, { Toaster } from 'react-hot-toast';
 //config
-import config from '../../../config';
 import { useRouter } from 'next/router';
+import useIsMountedRef from 'src/hooks/useIsMountedRef';
 
 // ----------------------------------------------------------------------
 
 export default function RegisterForm() {
   const isMountedRef = useIsMountedRef();
-  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const [showPassword, setShowPassword] = useState(false);
   const router = useRouter()
 

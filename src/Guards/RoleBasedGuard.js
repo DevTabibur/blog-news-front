@@ -1,6 +1,6 @@
 import { Container, Alert, AlertTitle } from '@mui/material';
-import { ContextData } from 'contexts/dataProviderContext';
 import { useContext } from 'react';
+import { ContextData } from 'src/contexts/dataProviderContext';
 
 
 const useCurrentRole = () => {

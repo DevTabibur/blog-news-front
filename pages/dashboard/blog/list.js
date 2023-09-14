@@ -6,20 +6,17 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 import { useEffect, useCallback, useState } from 'react';
 // material
 import { Box, Grid, Button, Skeleton, Container, Stack } from '@mui/material';
-// redux
-// import { useDispatch, useSelector } from '../../redux/store';
-// import { getPostsInitial, getMorePosts } from '../../redux/slices/blog';
 // hooks
-import useSettings from 'hooks/useSettings';
 // routes
-import { PATH_DASHBOARD } from 'routes/paths';
 // components
 import Page from 'components/Page';
 import HeaderBreadcrumbs from 'components/HeaderBreadcrumbs';
 import { BlogPostCard, BlogPostsSort, BlogPostsSearch } from 'components/_dashboard/blog';
 import { useDispatch, useSelector } from 'react-redux';
 import DashboardLayout from '@/components/DashboardLayout/DashboardLayout';
-import RoleBasedGuard from '../../src/Guards/RoleBasedGuard';
+import useSettings from 'src/hooks/useSettings';
+import { PATH_DASHBOARD } from 'routes/paths';
+import RoleBasedGuard from 'src/Guards/RoleBasedGuard';
 
 // ----------------------------------------------------------------------
 

@@ -1,9 +1,7 @@
-import { capitalCase } from 'change-case';
 // material
 import { styled } from '@mui/material/styles';
 import { Box, Card, Link, Container, Typography, Tooltip } from '@mui/material';
 // hooks
-import useAuth from '../../hooks/useAuth';
 // routes
 import { PATH_AUTH } from 'routes/paths';
 // layouts
@@ -43,7 +41,6 @@ const ContentStyle = styled('div')(({ theme }) => ({
 // ----------------------------------------------------------------------
 
 export default function Register() {
-  const { method } = useAuth();
 
   return (
     <RootStyle title="Register | BoostingOn Agency">
@@ -72,12 +69,11 @@ export default function Register() {
               </Typography>
               <Typography sx={{ color: 'text.secondary' }}>Free forever. No credit card needed.</Typography>
             </Box>
-            <Tooltip title={capitalCase(method)}>
+            {/* <Tooltip title={capitalCase(method)}>
               <Box component="img" src={`/static/auth/ic_${method}.png`} sx={{ width: 32, height: 32 }} />
-            </Tooltip>
+            </Tooltip> */}
           </Box>
 
-          {method === 'firebase' && <AuthFirebaseSocials />}
 
           <RegisterForm />
 

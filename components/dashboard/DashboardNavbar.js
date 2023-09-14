@@ -7,7 +7,6 @@ import menu2Fill from '@iconify/icons-eva/menu-2-fill';
 import { alpha, styled } from '@mui/material/styles';
 import { Box, Stack, AppBar, Toolbar, IconButton } from '@mui/material';
 // hooks
-import useCollapseDrawer from 'hooks/useCollapseDrawer';
 
 
 // components
@@ -15,6 +14,7 @@ import Searchbar from './Searchbar';
 import AccountPopover from './AccountPopover';
 import MHidden from 'components/@material-extend/MHidden';
 import NotificationsPopover from './NotificationsPopover';
+import useCollapseDrawer from 'src/hooks/useCollapseDrawer';
 
 // ----------------------------------------------------------------------
 const DRAWER_WIDTH = 280;

@@ -1,8 +1,8 @@
 import LoadingScreen from "@/components/LoadingScreen";
-import { ContextData } from "contexts/dataProviderContext";
 import { useRouter } from "next/router";
 import Login from "pages/auth/login";
 import { useContext, useEffect, useState } from "react";
+import { ContextData } from "src/contexts/dataProviderContext";
 
 
 const AuthGuard = ({ children }) => {

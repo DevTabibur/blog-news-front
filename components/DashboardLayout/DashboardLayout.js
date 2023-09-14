@@ -6,10 +6,10 @@ import { styled, useTheme } from '@mui/material/styles';
 
 import DashboardNavbar from "../dashboard/DashboardNavbar";
 import DashboardSidebar from "../dashboard/DashboardSidebar";
-import useCollapseDrawer from "hooks/useCollapseDrawer";
 import { useRouter } from "next/router";
 import LoadingScreen from "../LoadingScreen";
 import AuthGuard from "../../src/Guards/AuthGuard";
+import useCollapseDrawer from "src/hooks/useCollapseDrawer";
 // ----------------------------------------------------------------------
 
 const APP_BAR_MOBILE = 64;
