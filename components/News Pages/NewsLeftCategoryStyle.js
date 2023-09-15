@@ -22,62 +22,44 @@ const NewsLeftCategoryStyleComponents = () => {
 
     return (
         <>
-
-            {/* <Paper elevation={3} style={{ width: 200 }}>
-                <Tabs
-                    orientation="vertical"
-                    variant="scrollable"
-                    value={activeTab}
-                    onChange={handleTabChange}
-                >
-                    <Tab icon={<HomeIcon />} />
-                    <Tab label="Contact" />
-                    <Tab label="About" />
-                    <Tab label="Sports" />
-                    <Tab label="Game" />
-                    <Tab label="Show" />
-                </Tabs>
-
-            </Paper> */}
-
-            <Paper elevation={3} >
-                <List>
-                    <NextLink href="/" passHref>
-                        <ListItem
-                            button
-                            style={{
-                                backgroundColor: isActive('/') ? 'lightblue' : 'inherit',
-                            }}
-                        >
-                            <ListItemIcon>
-                                <HomeIcon />
-                            </ListItemIcon>
-                            <ListItemText primary="Home" />
-                        </ListItem>
-                    </NextLink>
-                    <NextLink href="/contact" passHref>
-                        <ListItem
-                            button
-                            style={{
-                                backgroundColor: isActive('/contact') ? 'lightblue' : 'inherit',
-                            }}
-                        >
-                            <ListItemText primary="Contact" />
-                        </ListItem>
-                    </NextLink>
-                    <NextLink href="/about" passHref>
-                        <ListItem
-                            button
-                            style={{
-                                backgroundColor: isActive('/about') ? 'lightblue' : 'inherit',
-                            }}
-                        >
-                            <ListItemText primary="About" />
-                        </ListItem>
-                    </NextLink>
-                    {/* Add more list items with NextLink */}
-                </List>
-            </Paper>
+        <Paper elevation={3} >
+            <List>
+                <NextLink href="/" passHref>
+                    <ListItem
+                        button
+                        style={{
+                            backgroundColor: isActive('/') ? '#011e29' : 'inherit',
+                        }}
+                    >
+                        <ListItemIcon>
+                            <HomeIcon sx={{color:'#fff'}}/>
+                        </ListItemIcon>
+                        <ListItemText secondary="Home" color='#fff' />
+                    </ListItem>
+                </NextLink>
+                <NextLink href="/জনপ্রিয়" passHref>
+                    <ListItem
+                        button
+                        style={{
+                            backgroundColor: isActive('/জনপ্রিয়') ? 'lightblue' : 'inherit',
+                        }}
+                    >
+                        <ListItemText primary="জনপ্রিয়" />
+                    </ListItem>
+                </NextLink>
+                <NextLink href="/এক নজরে সব খবর" passHref>
+                    <ListItem
+                        button
+                        style={{
+                            backgroundColor: isActive('/এক নজরে সব খবর') ? 'lightblue' : 'inherit',
+                        }}
+                    >
+                        <ListItemText primary="এক নজরে সব খবর" />
+                    </ListItem>
+                </NextLink>
+                {/* Add more list items with NextLink */}
+            </List>
+        </Paper>
         </>
     )
 }

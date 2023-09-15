@@ -6,7 +6,7 @@ import BlogNavComponents from "./BlogNav";
 
 
 
-const NewsLayout = () => {
+const NewsLayout = ({children}) => {
     const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down('sm'));
     const isTabletScreen = useMediaQuery((theme) => theme.breakpoints.down('md'));
     return (
@@ -23,7 +23,7 @@ const NewsLayout = () => {
                     )}
 
                     <Grid item xs={12} sm={7} >
-                        <NewsDataCardComponents />
+                        {children}
                     </Grid>
                     {!isTabletScreen && (
                         <Grid item xs={2}>
