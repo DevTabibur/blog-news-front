@@ -1,11 +1,5 @@
 export const BASE_URL = 'http://localhost:8000/api/v1'
 export const AUTH_URL = `${BASE_URL}/auth`
 export const USER_URL = `${BASE_URL}/users`
-export const PRODUCT_URL = `${BASE_URL}/product`
-export const CART_URL = `${BASE_URL}/cart`
-export const FEEDBACK_URL = `${BASE_URL}/feedback`
-export const FAQ_URL = `${BASE_URL}/faq`
-export const TEAM_URL = `${BASE_URL}/team`
-export const PROJECT_URL = `${BASE_URL}/project`
-export const SERVICE_URL = `${BASE_URL}/service`
 export const BLOG_URL = `${BASE_URL}/blog`
+export const CATEGORY_URL = `${BASE_URL}/category`

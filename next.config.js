@@ -10,4 +10,7 @@ module.exports = {
         locales: ['en', 'ar'],
         defaultLocale: 'en',
     },
+    images: {
+        domains: ['images.hindustantimes.com'],
+    },
 }

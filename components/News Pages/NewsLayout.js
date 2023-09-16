@@ -6,31 +6,33 @@ import BlogNavComponents from "./BlogNav";
 
 
 
-const NewsLayout = ({children}) => {
+const NewsLayout = ({ children }) => {
     const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down('sm'));
     const isTabletScreen = useMediaQuery((theme) => theme.breakpoints.down('md'));
     return (
         <>
+            <div style={{ backgroundColor: '#f5f5f5', height: '100vh' }}>
 
-            <AdPositioning1Components />
-            <BlogNavComponents />
-            <Container>
-                <Grid container spacing={4}>
-                    {!isSmallScreen && (
-                        <Grid item xs={3}>
-                            <NewsLeftCategoryStyleComponents/>
+                <AdPositioning1Components />
+                <BlogNavComponents />
+                <Container>
+                    <Grid container spacing={4}>
+                        {!isSmallScreen && (
+                            <Grid item xs={3}>
+                                <NewsLeftCategoryStyleComponents />
+                            </Grid>
+                        )}
+
+                        <Grid item xs={12} sm={7} >
+                            {children}
                         </Grid>
-                    )}
-
-                    <Grid item xs={12} sm={7} >
-                        {children}
+                        {!isTabletScreen && (
+                            <Grid item xs={2}>
+                            </Grid>
+                        )}
                     </Grid>
-                    {!isTabletScreen && (
-                        <Grid item xs={2}>
-                        </Grid>
-                    )}
-                </Grid>
-            </Container>
+                </Container>
+            </div>
         </>
     )
 }

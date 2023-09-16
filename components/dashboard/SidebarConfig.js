@@ -32,6 +32,16 @@ const sidebarConfig = [
         subheader: 'management',
         mainRole: ['super admin', 'admin'],
         items: [
+            // MANAGEMENT : CATEGORY
+            {
+                title: 'Category',
+                path: PATH_DASHBOARD.category.root,
+                icon: ICONS.kanban,
+                children: [
+                    { title: 'list', path: PATH_DASHBOARD.category.list },
+                    { title: 'new category', path: PATH_DASHBOARD.category.newCategory, }
+                ]
+            },
             // MANAGEMENT : BLOG
             {
                 title: 'blog',

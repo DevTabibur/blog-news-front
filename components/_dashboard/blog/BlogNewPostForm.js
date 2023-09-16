@@ -159,7 +159,14 @@ export default function BlogNewPostForm() {
             <Grid item xs={12} md={8}>
               <Card sx={{ p: 3 }}>
                 <Stack spacing={3}>
-                <div>
+                  <TextField
+                    fullWidth
+                    label="Post Title"
+                    {...getFieldProps('title')}
+                    error={Boolean(touched.title && errors.title)}
+                    helperText={touched.title && errors.title}
+                  />
+                  <div>
                     <LabelStyle>Cover</LabelStyle>
                     <UploadSingleFile
                       maxSize={3145728}
@@ -174,13 +181,7 @@ export default function BlogNewPostForm() {
                       </FormHelperText>
                     )}
                   </div>
-                  {/* <TextField
-                    fullWidth
-                    label="Post Title"
-                    {...getFieldProps('title')}
-                    error={Boolean(touched.title && errors.title)}
-                    helperText={touched.title && errors.title}
-                  /> */}
+
 
                   <div>
                     <LabelStyle>Content</LabelStyle>
@@ -197,7 +198,7 @@ export default function BlogNewPostForm() {
                     )}
                   </div>
 
-                  
+
                 </Stack>
               </Card>
             </Grid>
