@@ -7,14 +7,19 @@ import shareFill from '@iconify/icons-eva/share-fill';
 import messageCircleFill from '@iconify/icons-eva/message-circle-fill';
 // material
 import { alpha, styled } from '@mui/material/styles';
-import { Box, Card, Grid, Avatar, Typography, CardContent, Link } from '@mui/material';
+import { Box, Card, Grid, Avatar, Typography, CardContent, Link, CardActions, IconButton, Modal } from '@mui/material';
 // routes
-import { PATH_DASHBOARD } from '../../../routes/paths';
 // utils
-// import { fDate } from '../../../utils/formatTime';
 import { fShortenNumber } from '../../../utils/formatNumber';
-//
+//icons
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
 import SvgIconStyle from '../../SvgIconStyle';
+import { PATH_DASHBOARD } from 'routes/paths';
+import { fDate } from '@/utils/formatTime';
+import { useState } from 'react';
+import { deleteArticle } from 'apis/blog.api';
+import toast from 'react-hot-toast';
 
 // ----------------------------------------------------------------------
 
@@ -62,6 +67,18 @@ const CoverImgStyle = styled('img')({
   position: 'absolute'
 });
 
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'background.paper',
+  boxShadow: 24,
+  p: 4,
+  borderRadius: '10px'
+};
+
 // ----------------------------------------------------------------------
 
 BlogPostCard.propTypes = {
@@ -69,117 +86,120 @@ BlogPostCard.propTypes = {
   index: PropTypes.number
 };
 
-export default function BlogPostCard({ post, index }) {
-  const { cover, title, view, comment, share, author, createdAt } = post;
-  const linkTo = `${PATH_DASHBOARD.blog.root}/post/${paramCase(title)}`;
+export default function BlogPostCard({ article, index }) {
+  const { cover, metaTitle, content, tags, category, createdAt, view, share, _id } = article
+  console.log('article', article);
+  // for modal
+  const [open, setOpen] = useState(false);
+  const handleOpen = (data) => {
+    console.log('Modal data', data);
+    // setEditedData(data);
+    // // Store the _id of the category
+    // setCategoryIdToEdit(data._id);
+    // // Set the form values based on the clicked data
+    // formik.setValues({
+    //   categoryName: data.categoryName,
+    //   categoryLink: data.categoryLink,
+    // });
+    setOpen(true);
+  };
+  const handleClose = () => setOpen(false);
+
+  // delete a article
+  const deleteButton = async (id) => {
+    const confirmation = window.confirm("Do you want to DELETE?")
+    if (confirmation) {
+        const res = await deleteArticle(id);
+        if (res?.statusCode === 200) {
+            toast.success(res?.message)
+            window.location.reload()
+        }
+        else {
+            toast.error(res?.message)
+        }
+    }
+  }
+
+  const linkTo = `${PATH_DASHBOARD.blog.root}/${paramCase(metaTitle)}`;
   const latestPostLarge = index === 0;
   const latestPost = index === 1 || index === 2;
 
   const POST_INFO = [
-    { number: comment, icon: messageCircleFill },
     { number: view, icon: eyeFill },
     { number: share, icon: shareFill }
   ];
 
   return (
-    <Grid item xs={12} sm={latestPostLarge ? 12 : 6} md={latestPostLarge ? 6 : 3}>
-      <Card sx={{ position: 'relative' }}>
-        <CardMediaStyle
-          sx={{
-            ...((latestPostLarge || latestPost) && {
-              pt: 'calc(100% * 4 / 3)',
-              '&:after': {
-                top: 0,
-                content: "''",
-                width: '100%',
-                height: '100%',
-                position: 'absolute',
-                bgcolor: (theme) => alpha(theme.palette.grey[900], 0.72)
-              }
-            }),
-            ...(latestPostLarge && {
-              pt: {
-                xs: 'calc(100% * 4 / 3)',
-                sm: 'calc(100% * 3 / 4.66)'
-              }
-            })
-          }}
-        >
-          <SvgIconStyle
-            color="paper"
-            src="/static/icons/shape-avatar.svg"
-            sx={{
-              width: 80,
-              height: 36,
-              zIndex: 9,
-              bottom: -15,
-              position: 'absolute',
-              ...((latestPostLarge || latestPost) && { display: 'none' })
-            }}
-          />
-          <AvatarStyle
-            alt={author.name}
-            src={author.avatarUrl}
-            sx={{
-              ...((latestPostLarge || latestPost) && {
-                zIndex: 9,
-                top: 24,
-                left: 24,
-                width: 40,
-                height: 40
-              })
-            }}
-          />
+    <>
 
-          <CoverImgStyle alt={title} src={cover} />
-        </CardMediaStyle>
 
-        <CardContent
-          sx={{
-            pt: 4,
-            ...((latestPostLarge || latestPost) && {
-              bottom: 0,
-              width: '100%',
-              position: 'absolute'
-            })
-          }}
-        >
-          {/* <Typography gutterBottom variant="caption" sx={{ color: 'text.disabled', display: 'block' }}>
-            {fDate(createdAt)}
-          </Typography> */}
 
-          <TitleStyle
-            to={linkTo}
+      <Grid item xs={12} sm={latestPostLarge ? 12 : 6} md={latestPostLarge ? 6 : 3}>
+        <Card sx={{ position: 'relative' }}>
+          <CardContent
             sx={{
-              ...(latestPostLarge && { typography: 'h5', height: 60 }),
-              ...((latestPostLarge || latestPost) && {
-                color: 'common.white'
-              })
+              pt: 4,
             }}
           >
-            {title}
-          </TitleStyle>
+            <Typography variant="h3">{metaTitle}</Typography>
+            <Typography variant="caption" sx={{ color: 'text.disabled', display: 'block' }}>
+              {fDate(createdAt)}
+            </Typography>
 
-          <InfoStyle>
-            {POST_INFO.map((info, index) => (
-              <Box
-                key={index}
-                sx={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  ml: index === 0 ? 0 : 1.5,
-                  ...((latestPostLarge || latestPost) && {
-                    color: 'grey.500'
-                  })
-                }}
-              >
-                <Box component={Icon} icon={info.icon} sx={{ width: 16, height: 16, mr: 0.5 }} />
-                <Typography variant="caption">{fShortenNumber(info.number)}</Typography>
+            <Box sx={{ display: 'flex', alignItems: 'center', mt: 1.5 }}>
+              {POST_INFO.map((info, index) => (
+                <Box
+                  key={index}
+                  sx={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    ml: index === 0 ? 0 : 1.5,
+                    ...((latestPostLarge || latestPost) && {
+                      color: 'grey.500'
+                    })
+                  }}
+                >
+                  <Box component={Icon} icon={info.icon} sx={{ width: 16, height: 16, mr: 0.5 }} />
+                  <Typography variant="caption">{fShortenNumber(info.number)}</Typography>
+                </Box>
+              ))}
+
+              {/* IconButton container */}
+              <Box sx={{ ml: 'auto', display: 'flex', alignItems: 'center' }}>
+                <IconButton onClick={() => handleOpen(article)} aria-label="edit" sx={{ color: 'green' }}>
+                  <EditIcon />
+                </IconButton>
+                <IconButton onClick={() => deleteButton(_id)} aria-label="delete" sx={{ color: 'red' }}>
+                  <DeleteIcon />
+                </IconButton>
               </Box>
-            ))}
-          </InfoStyle>
-        </CardContent>
-      </Card>
-    </Grid>
+            </Box>
+          </CardContent>
+        </Card>
+      </Grid>
+
+      {/* // modal */}
+      {open && (
+        <Modal
+          keepMounted
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="keep-mounted-modal-title"
+          aria-describedby="keep-mounted-modal-description"
+        >
+          <Box sx={style}>
+            <Typography id="keep-mounted-modal-title" variant="h6" component="h2">
+              CATEGORY: CATEGORY
+            </Typography>
+            <Typography id="keep-mounted-modal-title" variant="h6" component="h2">
+              CATEGORY LINK: LINK
+            </Typography>
+
+            
+          </Box>
+        </Modal>
+      )}
+
+    </>
   );
 }

@@ -90,8 +90,6 @@ export default function BlogNewPostForm() {
     validationSchema: NewBlogSchema,
     onSubmit: async (values, { setSubmitting, resetForm }) => {
       try {
-        console.log('values', values);
-        console.log('coverImage', coverImage);
         const formData = new FormData();
 
         // Append non-file form fields

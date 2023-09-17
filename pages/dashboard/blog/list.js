@@ -12,11 +12,11 @@ import { Box, Grid, Button, Skeleton, Container, Stack } from '@mui/material';
 import Page from 'components/Page';
 import HeaderBreadcrumbs from 'components/HeaderBreadcrumbs';
 import { BlogPostCard, BlogPostsSort, BlogPostsSearch } from 'components/_dashboard/blog';
-import { useDispatch, useSelector } from 'react-redux';
 import DashboardLayout from '@/components/DashboardLayout/DashboardLayout';
 import useSettings from 'src/hooks/useSettings';
 import { PATH_DASHBOARD } from 'routes/paths';
 import RoleBasedGuard from 'src/Guards/RoleBasedGuard';
+import { getAllArticles } from 'apis/blog.api';
 
 // ----------------------------------------------------------------------
 
@@ -57,24 +57,49 @@ const SkeletonLoad = (
 
 export default function BlogList() {
     const { themeStretch } = useSettings();
-    const dispatch = useDispatch();
+    const [articles, setArticles] = useState([]);
     const [filters, setFilters] = useState('latest');
-    // const { posts, hasMore, index, step } = useSelector((state) => state.blog);
-    const posts = [
-        { id: 1, title: 'dummy1', author: [{ name: 'habib' }, { avatarUrl: '' }] },
-        // { id: 2, title: 'dummy2' }
-    ]
-    const hasMore = true
-    const sortedPosts = applySort(posts, filters);
-    const onScroll = useCallback(() => dispatch(getMorePosts()), [dispatch]);
+    const [hasMore, setHasMore] = useState(true); // Initialize hasMore state
+    const [index, setIndex] = useState(0); // Initialize index state
+    const step = 5; // Define your step value for pagination
 
-    // useEffect(() => {
-    //     dispatch(getPostsInitial(index, step));
-    // }, [dispatch, index, step]);
+    // Fetch more articles when scrolling
+    const onScroll = async () => {
+        try {
+            // console.log('Scrolling down...');
+            // Fetch more articles here, you'll need to adjust your API call accordingly
+            const moreArticles = await getAllArticles(index, step); // Example API call
+            if (moreArticles && moreArticles.length > 0) {
+                setArticles([...articles, ...moreArticles]);
+                setIndex(index + step);
+            } else {
+                setHasMore(false); // No more articles to fetch
+            }
+        } catch (error) {
+            console.error('Error fetching more articles', error);
+        }
+    };
+
+
+    useEffect(() => {
+        const getArticles = async () => {
+            try {
+                const res = await getAllArticles(0, step); // Fetch initial articles
+                setArticles(res?.data || []);
+                setIndex(step); // Set the initial index value
+            } catch (error) {
+                console.error('Error fetching articles', error);
+            }
+        };
+        getArticles();
+    }, [step]);
+
+    const sortedArticles = applySort(articles, filters);
 
     const handleChangeSort = (event) => {
         setFilters(event.target.value);
     };
+
 
     // button
     const NewPostBtn = (
@@ -87,7 +112,6 @@ export default function BlogList() {
     return (
         <>
             <DashboardLayout>
-
                 <Page title="Blog: Posts | Minimal-UI">
                     <RoleBasedGuard accessibleRoles={['super admin', 'admin']}>
                         <Container maxWidth={themeStretch ? false : 'lg'}>
@@ -102,7 +126,6 @@ export default function BlogList() {
                                     <NextLink href={PATH_DASHBOARD.blog.newPost} passHref>
                                         {NewPostBtn}
                                     </NextLink>
-
                                 }
                             />
 
@@ -112,22 +135,21 @@ export default function BlogList() {
                             </Stack>
 
                             <InfiniteScroll
+                                dataLength={articles.length}
                                 next={onScroll}
                                 hasMore={hasMore}
                                 loader={SkeletonLoad}
-                                dataLength={posts.length}
                                 style={{ overflow: 'inherit' }}
                             >
                                 <Grid container spacing={3}>
-                                    {sortedPosts.map((post, index) => (
-                                        <BlogPostCard key={post.id} post={post} index={index} />
+                                    {sortedArticles.map((article, index) => (
+                                        <BlogPostCard key={index} article={article} index={index} />
                                     ))}
                                 </Grid>
                             </InfiniteScroll>
                         </Container>
                     </RoleBasedGuard>
                 </Page>
-
             </DashboardLayout>
         </>
 
