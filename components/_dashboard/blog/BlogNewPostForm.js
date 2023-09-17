@@ -27,6 +27,7 @@ import { UploadSingleFile } from '../../upload';
 // //
 import BlogNewPostPreview from './BlogNewPostPreview';
 import { BLOG_URL } from 'apis/url';
+import toast from 'react-hot-toast';
 
 // ----------------------------------------------------------------------
 
@@ -68,20 +69,15 @@ export default function BlogNewPostForm() {
 
   const NewBlogSchema = Yup.object().shape({
     metaTitle: Yup.string().required('Meta Title is required'),
-    metaDescription: Yup.string().required('Meta Description is required'),
+    // metaDescription: Yup.string().required('Meta Description is required'),
     content: Yup.string().min(500).required('Content is required'),
+    tags: Yup.array()
+      .of(Yup.string()) // Validate each item in the array as a string
+      .min(1, 'At least one tag is required') // Ensure there's at least one tag
+      .required('Tags is required'),
+    category: Yup.string().required('Category is required'),
     cover: Yup.mixed().required('Cover is required')
   });
-  //   author: string
-  //   profile: IProfile
-  //   title: string
-  //   metaTitle: string
-  //   slug: string
-  //   publishedAt: string
-  //   article: string
-  //   postImage: IBlogImage
-  //   comments: IComment[] | undefined
-  // }
 
   const formik = useFormik({
     initialValues: {
@@ -89,33 +85,42 @@ export default function BlogNewPostForm() {
       content: '',
       cover: null,
       tags: ['Technology'],
-      publish: true,
-      comments: true,
-      metaDescription: '',
-      metaKeywords: ['Technology']
+      category: ''
     },
     validationSchema: NewBlogSchema,
     onSubmit: async (values, { setSubmitting, resetForm }) => {
       try {
         console.log('values', values);
         console.log('coverImage', coverImage);
-        // const postData = {
-        //   title: values?.title
-        // }
+        const formData = new FormData();
 
-        // url = `${BLOG_URL}`;
-        // fetch(url, {
-        //   method: "POST",
-        //   headers: {
-        //     'content-type': 'application/json',
-        //     authorization: `Bearer ${localStorage.getItem('accessToken')}`
-        //   },
-        //   body: JSON.stringify(postData)
-        // })
-        //   .then(res => res.json())
-        //   .then(data => {
-        //     console.log('blog data posted', data);
-        //   })
+        // Append non-file form fields
+        formData.append('metaTitle', values.metaTitle);
+        formData.append('content', values.content);
+        formData.append('category', values.category);
+        formData.append('tags', values.tags);
+        formData.append('cover', coverImage);
+
+
+        const url = `${BLOG_URL}`;
+        fetch(url, {
+          method: "POST",
+          headers: {
+            authorization: `Bearer ${localStorage.getItem('accessToken')}`
+          },
+          body: formData
+        })
+          .then(res => res.json())
+          .then(data => {
+            // console.log('blog data posted', data);
+            if (data.statusCode === 200) {
+              toast.success(data?.message)
+              resetForm()
+            }
+            else {
+              toast.error(data?.message)
+            }
+          })
 
 
 
@@ -151,24 +156,16 @@ export default function BlogNewPostForm() {
 
   return (
     <>
-      <h1>Blog Post Form</h1>
-
       <FormikProvider value={formik}>
         <Form noValidate autoComplete="off" onSubmit={handleSubmit}>
           <Grid container spacing={3}>
             <Grid item xs={12} md={8}>
               <Card sx={{ p: 3 }}>
                 <Stack spacing={3}>
-                  <TextField
-                    fullWidth
-                    label="Post Title"
-                    {...getFieldProps('title')}
-                    error={Boolean(touched.title && errors.title)}
-                    helperText={touched.title && errors.title}
-                  />
                   <div>
                     <LabelStyle>Cover</LabelStyle>
                     <UploadSingleFile
+                      name="cover"
                       maxSize={3145728}
                       accept="image/*"
                       file={values.cover}
@@ -206,7 +203,7 @@ export default function BlogNewPostForm() {
             <Grid item xs={12} md={4}>
               <Card sx={{ p: 3 }}>
                 <Stack spacing={3}>
-                  <div>
+                  {/* <div>
                     <FormControlLabel
                       control={<Switch {...getFieldProps('publish')} checked={values.publish} />}
                       label="Publish"
@@ -220,13 +217,28 @@ export default function BlogNewPostForm() {
                       labelPlacement="start"
                       sx={{ mx: 0, width: '100%', justifyContent: 'space-between' }}
                     />
-                  </div>
+                  </div> */}
+                  <TextField
+                    fullWidth
+                    label="Meta Title"
+                    {...getFieldProps('metaTitle')}
+                    error={Boolean(touched.metaTitle && errors.metaTitle)}
+                    helperText={touched.metaTitle && errors.metaTitle}
+                  />
+                  <TextField
+                    fullWidth
+                    label="Category"
+                    {...getFieldProps('category')}
+                    error={Boolean(touched.category && errors.category)}
+                    helperText={touched.category && errors.category}
+                  />
 
                   <Autocomplete
                     multiple
                     freeSolo
                     value={values.tags}
                     onChange={(event, newValue) => {
+                      console.log('Selected Tags:', newValue);
                       setFieldValue('tags', newValue);
                     }}
                     options={TAGS_OPTION.map((option) => option)}
@@ -238,32 +250,8 @@ export default function BlogNewPostForm() {
                     renderInput={(params) => <TextField {...params} label="Tags" />}
                   />
 
-                  <TextField fullWidth label="Meta title" {...getFieldProps('metaTitle')} />
 
-                  <TextField
-                    fullWidth
-                    multiline
-                    minRows={3}
-                    maxRows={5}
-                    label="Meta description"
-                    {...getFieldProps('metaDescription')}
-                  />
 
-                  <Autocomplete
-                    multiple
-                    freeSolo
-                    value={values.tags}
-                    onChange={(event, newValue) => {
-                      setFieldValue('metaKeywords', newValue);
-                    }}
-                    options={TAGS_OPTION.map((option) => option)}
-                    renderTags={(value, getTagProps) =>
-                      value.map((option, index) => (
-                        <Chip {...getTagProps({ index })} key={option} size="small" label={option} />
-                      ))
-                    }
-                    renderInput={(params) => <TextField {...params} label="Meta keywords" />}
-                  />
                 </Stack>
               </Card>
 

@@ -44,7 +44,7 @@ const sidebarConfig = [
             },
             // MANAGEMENT : BLOG
             {
-                title: 'blog',
+                title: 'Article',
                 path: PATH_DASHBOARD.blog.root,
                 icon: ICONS.blog,
                 children: [
