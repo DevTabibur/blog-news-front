@@ -1,6 +1,7 @@
 import DashboardLayout from "@/components/DashboardLayout/DashboardLayout"
 import HeaderBreadcrumbs from "@/components/HeaderBreadcrumbs"
 import Page from "@/components/Page"
+import CreateWebsiteNameForm from "@/components/_dashboard/settings/CreateWebsiteNameForm"
 import { Container } from "@mui/material"
 import { PATH_DASHBOARD } from "routes/paths"
 import RoleBasedGuard from "src/Guards/RoleBasedGuard"
@@ -23,7 +24,7 @@ const WebsiteNamePage = () => {
                                     { name: ' Name', href: PATH_DASHBOARD.settings.websiteName },
                                 ]}
                             />
-                            <h1>WebsiteNamePage</h1>
+                            <CreateWebsiteNameForm />
                         </Container>
                     </RoleBasedGuard>
                 </Page>

@@ -46,25 +46,4 @@ eita ashtese, server off hoi gele ashtese...
 12. login korar poreu page redirect hosse na. (solved)
 13. jwt expiresTime rakhbo na. cancel kore dibo backend theke. jwtHelpers er moddhe ase
 14. register + login sob ee hosse valo vabe. but password change kora pore, change holeu, password is not matched error ashtese. jeta big issue
-
-## FUNCTIONAL PAGE WORK
-
-1. Feedback Dashboard page => protected delete done, edit baki, image upload baki
-2. Team Dashboard page =>
-3. FAQ dashboard page => completely all done
-
-## PROTECTED ROUTES
-
-## ADMIN, SUPER ADMIN ROUTES
-
-1. FAQ page is protected => <RoleBasedGuard accessibleRoles={['super admin', 'admin']}></RoleBasedGuard> && sidebar config also
-2. Blog page is protected => <RoleBasedGuard accessibleRoles={['super admin', 'admin']}></RoleBasedGuard> && sidebar config also
-3. Job page is protected => <RoleBasedGuard accessibleRoles={['super admin', 'admin']}></RoleBasedGuard> && sidebar config also
-4. Service page is protected => <RoleBasedGuard accessibleRoles={['super admin', 'admin']}></RoleBasedGuard> && sidebar config also
-5. Team page is protected => <RoleBasedGuard accessibleRoles={['super admin', 'admin']}></RoleBasedGuard> && sidebar config also
-6. Project page is protected => <RoleBasedGuard accessibleRoles={['super admin', 'admin']}></RoleBasedGuard> && sidebar config also
-7. Feedback page is protected => <RoleBasedGuard accessibleRoles={['super admin', 'admin']}></RoleBasedGuard> && sidebar config also
-
-## USER ROUTES
-
-1. User> list is protected
+15. sob kisu production level e upload korar pore, database a websiteName ta by default example name set kore dite hobe. otherwise, website name update kora jabe na, bug dekha dibe
