@@ -29,6 +29,7 @@ import dynamic from 'next/dynamic';
 import { UploadSingleFile } from '@/components/upload';
 import { LoadingButton } from '@mui/lab';
 import BlogNewPostPreview from './BlogNewPostPreview';
+import { BLOG_URL } from 'apis/url';
 const QuillEditor = dynamic(() => import('../editor/quill/index.js'), { ssr: false });
 // ----------------------------------------------------------------------
 
@@ -124,19 +125,26 @@ const TAGS_OPTION = [
 
 export default function BlogPostCard({ article, index }) {
   const { cover, metaTitle, content, tags, category, createdAt, views, share, _id } = article
-  console.log('article', article);
+  // console.log('article', article);
   // for modal
   const [open, setOpen] = useState(false);
+  const [editedData, setEditedData] = useState({});
+  const [articleIdToEdit, setArticleIdToEdit] = useState(null);
+  const [coverImage, setCoverImage] = useState(null)
+
   const handleOpen = (data) => {
-    console.log('Modal data', data);
-    // setEditedData(data);
-    // // Store the _id of the category
-    // setCategoryIdToEdit(data._id);
-    // // Set the form values based on the clicked data
-    // formik.setValues({
-    //   categoryName: data.categoryName,
-    //   categoryLink: data.categoryLink,
-    // });
+    // console.log('Modal data', data);
+    setEditedData(data);
+    // Store the _id of the category
+    setArticleIdToEdit(data?._id);
+    // Set the form values based on the clicked data
+    formik.setValues({
+      metaTitle: data.metaTitle,
+      content: data.content,
+      category: data.category,
+      cover: `http://localhost:8000/${data?.cover}`,
+      tags: data.tags,
+    });
     setOpen(true);
   };
   const handleClose = () => setOpen(false);
@@ -198,19 +206,20 @@ export default function BlogPostCard({ article, index }) {
     validationSchema: NewBlogSchema,
     onSubmit: async (values, { setSubmitting, resetForm }) => {
       try {
+        // i want to update the data. but how?
         const formData = new FormData();
 
         // Append non-file form fields
-        formData.append('metaTitle', values.metaTitle);
+        formData.append('metaTitle', values?.metaTitle);
         formData.append('content', values.content);
         formData.append('category', values.category);
         formData.append('tags', values.tags);
         formData.append('cover', coverImage);
 
 
-        const url = `${BLOG_URL}`;
+        const url = `${BLOG_URL}/${articleIdToEdit}`;
         fetch(url, {
-          method: "POST",
+          method: "PATCH",
           headers: {
             authorization: `Bearer ${localStorage.getItem('accessToken')}`
           },
@@ -218,7 +227,7 @@ export default function BlogPostCard({ article, index }) {
         })
           .then(res => res.json())
           .then(data => {
-            // console.log('blog data posted', data);
+            console.log('blog data updated', data);
             if (data.statusCode === 200) {
               toast.success(data?.message)
               resetForm()
@@ -378,21 +387,7 @@ export default function BlogPostCard({ article, index }) {
                   <Grid item xs={12} md={4}>
                     <Card sx={{ p: 3 }}>
                       <Stack spacing={3}>
-                        {/* <div>
-                    <FormControlLabel
-                      control={<Switch {...getFieldProps('publish')} checked={values.publish} />}
-                      label="Publish"
-                      labelPlacement="start"
-                      sx={{ mb: 1, mx: 0, width: '100%', justifyContent: 'space-between' }}
-                    />
-
-                    <FormControlLabel
-                      control={<Switch {...getFieldProps('comments')} checked={values.comments} />}
-                      label="Enable comments"
-                      labelPlacement="start"
-                      sx={{ mx: 0, width: '100%', justifyContent: 'space-between' }}
-                    />
-                  </div> */}
+                        
                         <TextField
                           fullWidth
                           label="Meta Title"
@@ -443,7 +438,7 @@ export default function BlogPostCard({ article, index }) {
                         Preview
                       </Button>
                       <LoadingButton fullWidth type="submit" variant="contained" size="large" loading={isSubmitting}>
-                        Post
+                        Update
                       </LoadingButton>
                     </Stack>
                   </Grid>
