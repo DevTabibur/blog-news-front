@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { orderBy } from 'lodash';
+import { useEffect, useState } from 'react'
 import { styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
@@ -14,33 +15,110 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-import { Box, Link, Tooltip } from '@mui/material';
+import { Box, Grid, Link, Skeleton, Tooltip } from '@mui/material';
 import NextLink from 'next/link';
 // icons
 import FacebookIcon from '@mui/icons-material/Facebook';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import { getAllArticles } from 'apis/blog.api';
+
+
+// ----------------------------------------------------------------------
+
+const SORT_OPTIONS = [
+    { value: 'latest', label: 'Latest' },
+    { value: 'popular', label: 'Popular' },
+    { value: 'oldest', label: 'Oldest' }
+];
+
+// ----------------------------------------------------------------------
+
+const applySort = (posts, sortBy) => {
+    if (sortBy === 'latest') {
+        return orderBy(posts, ['createdAt'], ['desc']);
+    }
+    if (sortBy === 'oldest') {
+        return orderBy(posts, ['createdAt'], ['asc']);
+    }
+    if (sortBy === 'popular') {
+        return orderBy(posts, ['view'], ['desc']);
+    }
+    return posts;
+};
+
+const SkeletonLoad = (
+    <Grid container spacing={3} sx={{ mt: 2 }}>
+        {[...Array(4)].map((_, index) => (
+            <Grid item xs={12} md={3} key={index}>
+                <Skeleton variant="rectangular" width="100%" sx={{ height: 200, borderRadius: 2 }} />
+                <Box sx={{ display: 'flex', mt: 1.5 }}>
+                    <Skeleton variant="circular" sx={{ width: 40, height: 40 }} />
+                    <Skeleton variant="text" sx={{ mx: 1, flexGrow: 1 }} />
+                </Box>
+            </Grid>
+        ))}
+    </Grid>
+);
+
 
 
 const NewsDataCardComponents = () => {
+    const [articles, setArticles] = useState([]);
+    const [filters, setFilters] = useState('latest');
+    const [hasMore, setHasMore] = useState(true); // Initialize hasMore state
+    const [index, setIndex] = useState(0); // Initialize index state
+    const step = 5; // Define your step value for pagination
 
-    const [expanded, setExpanded] = useState(false);
+    // Fetch more articles when scrolling
+    const onScroll = async () => {
+        try {
+            // console.log('Scrolling down...');
+            // Fetch more articles here, you'll need to adjust your API call accordingly
+            const moreArticles = await getAllArticles(index, step); // Example API call
+            if (moreArticles && moreArticles.length > 0) {
+                setArticles([...articles, ...moreArticles]);
+                setIndex(index + step);
+            } else {
+                setHasMore(false); // No more articles to fetch
+            }
+        } catch (error) {
+            console.error('Error fetching more articles', error);
+        }
+    };
 
-    const handleExpandClick = () => {
-        setExpanded(!expanded);
+
+    useEffect(() => {
+        const getArticles = async () => {
+            try {
+                const res = await getAllArticles(0, step); // Fetch initial articles
+                setArticles(res?.data || []);
+                setIndex(step); // Set the initial index value
+            } catch (error) {
+                console.error('Error fetching articles', error);
+            }
+        };
+        getArticles();
+    }, [step]);
+
+    const sortedArticles = applySort(articles, filters);
+
+    const handleChangeSort = (event) => {
+        setFilters(event.target.value);
     };
 
     // for sharing blog news
-    const shareOnFacebook = ({ blogUrl }) => {
-        window.open(`https://www.facebook.com/sharer/sharer.php?u=${blogUrl}`, 'Facebook Share', 'width=600,height=400');
+    const shareOnFacebook = ({ articleId }) => {
+        console.log('articleId', articleId);
+        // window.open(`https://www.facebook.com/sharer/sharer.php?u=${articleId}`, 'Facebook Share', 'width=600,height=400');
     };
 
-    const shareOnTwitter = ({ blogUrl }) => {
-        window.open(`https://twitter.com/intent/tweet?url=${blogUrl}`, 'Twitter Share', 'width=600,height=400');
+    const shareOnTwitter = ({ articleId }) => {
+        window.open(`https://twitter.com/intent/tweet?url=${articleId}`, 'Twitter Share', 'width=600,height=400');
     };
 
-    const shareOnLinkedIn = ({ blogUrl }) => {
-        window.open(`https://www.linkedin.com/shareArticle?url=${blogUrl}`, 'LinkedIn Share', 'width=600,height=400');
+    const shareOnLinkedIn = ({ articleId }) => {
+        window.open(`https://www.linkedin.com/shareArticle?url=${articleId}`, 'LinkedIn Share', 'width=600,height=400');
     };
 
 
@@ -68,7 +146,7 @@ const NewsDataCardComponents = () => {
                     </Typography>
                     <Box display="flex" alignItems="center">
                         <Tooltip title="Share on Facebook">
-                            <IconButton onClick={shareOnFacebook}>
+                            <IconButton onClick={() => shareOnFacebook('123')}>
                                 <FacebookIcon fontSize="small" sx={{ color: '#1877F2' }} />
                             </IconButton>
                         </Tooltip>

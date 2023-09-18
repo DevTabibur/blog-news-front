@@ -85,7 +85,7 @@ export default function BlogNewPostForm() {
       content: '',
       cover: null,
       tags: ['Technology'],
-      category: ''
+      category: '',
     },
     validationSchema: NewBlogSchema,
     onSubmit: async (values, { setSubmitting, resetForm }) => {
