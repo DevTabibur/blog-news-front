@@ -37,14 +37,17 @@ export const PATH_DASHBOARD = {
     blog: {
         root: path(ROOTS_DASHBOARD, '/blog'),
         list: path(ROOTS_DASHBOARD, '/blog/list'),
-        // posts: path(ROOTS_DASHBOARD, '/blog/posts'),
-        // post: path(ROOTS_DASHBOARD, '/blog/post/:title'),
-        // postById: path(ROOTS_DASHBOARD, '/blog/post/apply-these-7-secret-techniques-to-improve-event'),
         newPost: path(ROOTS_DASHBOARD, '/blog/create-post')
     },
     category: {
         root: path(ROOTS_DASHBOARD, '/category'),
         list: path(ROOTS_DASHBOARD, '/category/list'),
         newCategory: path(ROOTS_DASHBOARD, '/category/new-category')
+    },
+    settings: {
+        root: path(ROOTS_DASHBOARD, '/settings'),
+        websiteName: path(ROOTS_DASHBOARD, '/settings/website-name'),
+        logo: path(ROOTS_DASHBOARD, '/settings/logo'),
+        favicon: path(ROOTS_DASHBOARD, '/settings/favicon'),
     }
 };

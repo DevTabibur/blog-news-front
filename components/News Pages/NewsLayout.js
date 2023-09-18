@@ -11,7 +11,7 @@ const NewsLayout = ({ children }) => {
     const isTabletScreen = useMediaQuery((theme) => theme.breakpoints.down('md'));
     return (
         <>
-            <div style={{ backgroundColor: '#f5f5f5', height: '100vh' }}>
+            <div>
 
                 <AdPositioning1Components />
                 <BlogNavComponents />

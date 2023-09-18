@@ -52,14 +52,25 @@ const sidebarConfig = [
                     { title: 'create post', path: PATH_DASHBOARD.blog.newPost, }
                 ]
             },
-        
-            
-            
+            // MANAGEMENT : SETTINGS
+            {
+                title: 'Settings',
+                path: PATH_DASHBOARD.blog.root,
+                icon: ICONS.dashboard,
+                children: [
+                    { title: 'website name', path: PATH_DASHBOARD.settings.websiteName },
+                    { title: 'Logo', path: PATH_DASHBOARD.settings.logo, },
+                    { title: 'fav icon', path: PATH_DASHBOARD.settings.favicon, }
+                ]
+            },
+
+
+
 
         ]
     },
-    
-    
+
+
 
 ];
 

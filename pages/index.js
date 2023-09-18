@@ -5,10 +5,11 @@ import AdPositioning1Components from '@/components/AdPositioning/AdPositioning1'
 import NewsLayout from '@/components/News Pages/NewsLayout';
 import NextLink from 'next/link'
 import NewsDataCardComponents from '@/components/News Pages/NewsDataCard';
+import { BLOG_URL } from 'apis/url';
 
-const Index = () => {
+const Index = ({articles}) => {
+    // console.log('articles', articles);
     const [isLoading, setIsLoading] = useState(true)
-
     useEffect(() => {
         const timer = setTimeout(() => {
             setIsLoading(false)
@@ -24,7 +25,7 @@ const Index = () => {
                 <>
                     <div>
                         <NewsLayout >
-                            <NewsDataCardComponents></NewsDataCardComponents>
+                            <NewsDataCardComponents articles={articles}></NewsDataCardComponents>
                         </NewsLayout>
                     </div>
                 </>
@@ -34,3 +35,11 @@ const Index = () => {
 }
 
 export default Index;
+
+
+export const getStaticProps = (async () => {
+    const res = await fetch(`${BLOG_URL}`)
+    const data = await res.json();
+    // console.log('data', data);
+    return { props: { articles: data?.data } }
+})

@@ -14,6 +14,7 @@ import { fShortenNumber } from '../../../utils/formatNumber';
 //icons
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
+import VisibilityIcon from '@mui/icons-material/Visibility';
 import SvgIconStyle from '../../SvgIconStyle';
 import { PATH_DASHBOARD } from 'routes/paths';
 import { fDate } from '@/utils/formatTime';
@@ -164,6 +165,11 @@ export default function BlogPostCard({ article, index }) {
     }
   }
 
+  // reading function
+  // const handleRead = async (data) => {
+  //   setOpen(true);
+  // }
+
   const linkTo = `${PATH_DASHBOARD.blog.root}/${paramCase(metaTitle)}`;
   const latestPostLarge = index === 0;
   const latestPost = index === 1 || index === 2;
@@ -277,15 +283,15 @@ export default function BlogPostCard({ article, index }) {
         <Card sx={{ position: 'relative' }}>
           <CardContent
             sx={{
-              pt: 4,
+
             }}
           >
-            <Typography variant="h3">{metaTitle}</Typography>
+            <Typography variant="h5">{metaTitle}</Typography>
             <Typography variant="caption" sx={{ color: 'text.disabled', display: 'block' }}>
               {fDate(createdAt)}
             </Typography>
 
-            <Box sx={{ display: 'flex', alignItems: 'center', mt: 1.5 }}>
+            <Box sx={{ display: 'flex', alignItems: 'center', }}>
               {POST_INFO.map((info, index) => (
                 <Box
                   key={index}
@@ -311,6 +317,10 @@ export default function BlogPostCard({ article, index }) {
                 <IconButton onClick={() => deleteButton(_id)} aria-label="delete" sx={{ color: 'red' }}>
                   <DeleteIcon />
                 </IconButton>
+                {/* Add the "Read" button with the VisibilityIcon */}
+                {/* <IconButton onClick={() => handleRead(article)} aria-label="read" sx={{ color: 'blue' }}>
+                  <VisibilityIcon />
+                </IconButton> */}
               </Box>
             </Box>
           </CardContent>
@@ -387,7 +397,7 @@ export default function BlogPostCard({ article, index }) {
                   <Grid item xs={12} md={4}>
                     <Card sx={{ p: 3 }}>
                       <Stack spacing={3}>
-                        
+
                         <TextField
                           fullWidth
                           label="Meta Title"
