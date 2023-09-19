@@ -5,7 +5,6 @@ import homeFill from '@iconify/icons-eva/home-fill';
 import personFill from '@iconify/icons-eva/person-fill';
 import settings2Fill from '@iconify/icons-eva/settings-2-fill';
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined'
-// import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import NextLink from 'next/link'
 import { useRouter } from 'next/router'
 // material
@@ -15,8 +14,6 @@ import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined'
 // routes
 import { PATH_DASHBOARD } from 'routes/paths';
 // hooks
-// import useAuth from 'hooks/useAuth';
-// import useIsMountedRef from 'hooks/useIsMountedRef';
 // components
 import MIconButton from 'components/@material-extend/MIconButton';
 // import MyAvatar from 'components/MyAvatar';

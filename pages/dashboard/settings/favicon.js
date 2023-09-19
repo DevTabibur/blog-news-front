@@ -1,6 +1,7 @@
 import DashboardLayout from "@/components/DashboardLayout/DashboardLayout"
 import HeaderBreadcrumbs from "@/components/HeaderBreadcrumbs"
 import Page from "@/components/Page"
+import FavIconFormPage from "@/components/_dashboard/settings/favIconForm"
 import { Container } from "@mui/material"
 import { PATH_DASHBOARD } from "routes/paths"
 import RoleBasedGuard from "src/Guards/RoleBasedGuard"
@@ -9,9 +10,9 @@ import useSettings from "src/hooks/useSettings"
 
 const FavIconPage = () => {
     const { themeStretch } = useSettings();
-  return (
-    <>
-        <DashboardLayout>
+    return (
+        <>
+            <DashboardLayout>
                 <Page title="Icon: Fav Icon | BoostingOn Agency">
                     <RoleBasedGuard accessibleRoles={['super admin', 'admin']}>
                         <Container maxWidth={themeStretch ? false : 'lg'}>
@@ -23,13 +24,13 @@ const FavIconPage = () => {
                                     { name: 'Upload a FavIcon', href: PATH_DASHBOARD.settings.favicon },
                                 ]}
                             />
-                            <h1>FavIcon Page</h1>
+                            <FavIconFormPage />
                         </Container>
                     </RoleBasedGuard>
                 </Page>
             </DashboardLayout>
-    </>
-  )
+        </>
+    )
 }
 
 export default FavIconPage

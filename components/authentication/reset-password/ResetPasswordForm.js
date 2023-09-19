@@ -5,9 +5,9 @@ import { Form, FormikProvider, useFormik } from 'formik';
 import { TextField, Alert, Stack } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 // hooks
-import useAuth from '../../../hooks/useAuth';
-import useIsMountedRef from '../../../hooks/useIsMountedRef';
 import { AUTH_URL } from 'apis/url';
+
+import useIsMountedRef from 'src/hooks/useIsMountedRef';
 
 // ----------------------------------------------------------------------
 
@@ -17,7 +17,7 @@ ResetPasswordForm.propTypes = {
 };
 
 export default function ResetPasswordForm({ onSent, onGetEmail }) {
-  const { resetPassword } = useAuth();
+
   const isMountedRef = useIsMountedRef();
 
   const ResetPasswordSchema = Yup.object().shape({

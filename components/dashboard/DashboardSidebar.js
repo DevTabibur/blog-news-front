@@ -12,7 +12,6 @@ import { Box, Link, Stack, Button, Drawer, Tooltip, Typography, CardActionArea, 
 
 // hooks
 
-// import useAuth from '../../hooks/useAuth';
 // components
 import Scrollbar from '../Scrollbar';
 import MyAvatar from '../MyAvatar';

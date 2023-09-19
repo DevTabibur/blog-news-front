@@ -1,11 +1,9 @@
 import { Icon } from '@iconify/react';
-import { Link as RouterLink } from 'react-router-dom';
 import arrowIosBackFill from '@iconify/icons-eva/arrow-ios-back-fill';
 // material
 import { styled } from '@mui/material/styles';
 import { Box, Button, Link, Container, Typography } from '@mui/material';
 // layouts
-import LogoOnlyLayout from '../../layouts/LogoOnlyLayout';
 // routes
 import { PATH_AUTH } from '../../routes/paths';
 // components
@@ -26,13 +24,13 @@ const RootStyle = styled(Page)(({ theme }) => ({
 export default function VerifyCode() {
   return (
     <RootStyle title="Verify | Minimal UI">
-      <LogoOnlyLayout />
+      {/* <LogoOnlyLayout /> */}
 
       <Container>
         <Box sx={{ maxWidth: 480, mx: 'auto' }}>
           <Button
             size="small"
-            component={RouterLink}
+            component='a'
             to={PATH_AUTH.login}
             startIcon={<Icon icon={arrowIosBackFill} width={20} height={20} />}
             sx={{ mb: 3 }}

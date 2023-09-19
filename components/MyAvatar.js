@@ -1,5 +1,4 @@
 // hooks
-// import useAuth from '../hooks/useAuth';
 //
 import createAvatar from '@/utils/createAvatar';
 import MAvatar from './@material-extend/MAvatar';
@@ -7,7 +6,6 @@ import MAvatar from './@material-extend/MAvatar';
 // ----------------------------------------------------------------------
 
 export default function MyAvatar({ ...other }) {
-    //   const { user } = useAuth();
     const user = {
         displayName: 'Tabibur DUMMY DATA'
     }

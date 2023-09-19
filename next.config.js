@@ -11,6 +11,6 @@ module.exports = {
         defaultLocale: 'en',
     },
     images: {
-        domains: ['images.hindustantimes.com'],
+        domains: ['images.hindustantimes.com', 'localhost'], // Remove "http://localhost:8000/"
     },
 }

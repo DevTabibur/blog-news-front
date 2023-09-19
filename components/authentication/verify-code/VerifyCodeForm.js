@@ -1,6 +1,5 @@
 import * as Yup from 'yup';
 import { useSnackbar } from 'notistack';
-import { useNavigate } from 'react-router-dom';
 import { Form, FormikProvider, useFormik } from 'formik';
 // material
 import { OutlinedInput, FormHelperText, Stack } from '@mui/material';
@@ -9,6 +8,7 @@ import { LoadingButton } from '@mui/lab';
 import { PATH_DASHBOARD } from '../../../routes/paths';
 // utils
 import fakeRequest from '../../../utils/fakeRequest';
+import { useRouter } from 'next/router';
 
 // ----------------------------------------------------------------------
 
@@ -20,8 +20,8 @@ function maxLength(object) {
 }
 
 export default function VerifyCodeForm() {
-  const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
+  const router = useRouter()
 
   const VerifyCodeSchema = Yup.object().shape({
     code1: Yup.number().required('Code is required'),
@@ -45,7 +45,7 @@ export default function VerifyCodeForm() {
     onSubmit: async () => {
       await fakeRequest(500);
       enqueueSnackbar('Verify success', { variant: 'success' });
-      navigate(PATH_DASHBOARD.root);
+      router.push(PATH_DASHBOARD.root);
     }
   });
 

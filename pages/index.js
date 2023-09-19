@@ -7,7 +7,7 @@ import NextLink from 'next/link'
 import NewsDataCardComponents from '@/components/News Pages/NewsDataCard';
 import { BLOG_URL } from 'apis/url';
 
-const Index = ({articles}) => {
+const Index = ({ articles }) => {
     // console.log('articles', articles);
     const [isLoading, setIsLoading] = useState(true)
     useEffect(() => {
@@ -23,7 +23,7 @@ const Index = ({articles}) => {
                 <LoadingScreen />
             ) : (
                 <>
-                    <div>
+                    <div style={{backgroundColor:"#f6f6f6"}}>
                         <NewsLayout >
                             <NewsDataCardComponents articles={articles}></NewsDataCardComponents>
                         </NewsLayout>
@@ -41,5 +41,7 @@ export const getStaticProps = (async () => {
     const res = await fetch(`${BLOG_URL}`)
     const data = await res.json();
     // console.log('data', data);
-    return { props: { articles: data?.data } }
+    return {
+        props: { articles: data?.data }, revalidate: 10,  // automatically re build this page after 10 seconds
+    }
 })

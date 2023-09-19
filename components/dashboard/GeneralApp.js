@@ -1,7 +1,6 @@
 // material
 import { Container, Grid, Stack } from '@mui/material';
 // hooks
-import useAuth from '../../hooks/useAuth';
 import useSettings from '../../hooks/useSettings';
 // components
 import AppWelcome from './AppWelcome';
@@ -26,7 +25,6 @@ import Page from '../Page';
 
 export default function GeneralApp() {
     const { themeStretch } = useSettings();
-    // const { user } = useAuth();
     const user = {
         displayName: 'Tabibur Rahman'
     }

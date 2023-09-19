@@ -1,17 +1,15 @@
 import { useState } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
 // material
 import { styled } from '@mui/material/styles';
 import { Box, Button, Container, Typography } from '@mui/material';
 // layouts
-import LogoOnlyLayout from '../../layouts/LogoOnlyLayout';
 // routes
-import { PATH_AUTH } from '../../routes/paths';
 // components
-import Page from '../../components/Page';
 import { ResetPasswordForm } from '../../components/authentication/reset-password';
+import { SentIcon } from 'assets/illustrations';
+import Page from '@/components/Page';
+import { PATH_AUTH } from 'routes/paths';
 //
-import { SentIcon } from '../../assets';
 
 // ----------------------------------------------------------------------
 
@@ -31,7 +29,7 @@ export default function ResetPassword() {
 
   return (
     <RootStyle title="Reset Password | Minimal UI">
-      <LogoOnlyLayout />
+      {/* <LogoOnlyLayout /> */}
 
       <Container>
         <Box sx={{ maxWidth: 480, mx: 'auto' }}>
@@ -47,7 +45,7 @@ export default function ResetPassword() {
 
               <ResetPasswordForm onSent={() => setSent(true)} onGetEmail={(value) => setEmail(value)} />
 
-              <Button fullWidth size="large" component={RouterLink} to={PATH_AUTH.login} sx={{ mt: 1 }}>
+              <Button fullWidth size="large" component='a' to={PATH_AUTH.login} sx={{ mt: 1 }}>
                 Back
               </Button>
             </>
@@ -65,7 +63,7 @@ export default function ResetPassword() {
                 Please check your email.
               </Typography>
 
-              <Button size="large" variant="contained" component={RouterLink} to={PATH_AUTH.login} sx={{ mt: 5 }}>
+              <Button size="large" variant="contained" component='a' to={PATH_AUTH.login} sx={{ mt: 5 }}>
                 Back
               </Button>
             </Box>

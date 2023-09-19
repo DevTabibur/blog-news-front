@@ -7,8 +7,8 @@ import { Box, Button, Container, Typography } from '@mui/material';
 // import LogoOnlyLayout from '../../layouts/LogoOnlyLayout';
 import { ResetPasswordForm } from '@/components/authentication/reset-password';
 import { SentIcon } from 'assets/illustrations';
-import Page from '@/components/Page';
 import { PATH_AUTH } from 'routes/paths';
+import Page from '@/components/Page';
 // routes
 
 

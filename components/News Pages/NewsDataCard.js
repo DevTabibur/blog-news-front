@@ -64,7 +64,7 @@ const SkeletonLoad = (
 
 
 
-const NewsDataCardComponents = ({articles}) => {
+const NewsDataCardComponents = ({ articles }) => {
     console.log('articles', articles);
     // const [articles, setArticles] = useState([]);
     // const [filters, setFilters] = useState('latest');
@@ -131,58 +131,55 @@ const NewsDataCardComponents = ({articles}) => {
 
     return (
         <>
-            <Card sx={{ maxWidth: 550, padding: '10px', marginBottom: '20px' }}>
-                <Typography variant='h4' sx={{ mb: '10px' }}>
-                    Bengali News
-                </Typography>
-                {articles.map((art, i) => (
-                    // Add a unique key to the Card component
-                    <Card sx={{ marginBottom: '20px' }} key={i}>
-                        <CardMedia
-                            component="img"
-                            height="300"
-                            image={`http://localhost:8000/${art?.cover}`}
-                            alt={`${art?.metaTitle}`}
-                        />
-                        <CardContent>
-                            <Typography variant="h6" color="text.black">
-                                {art?.metaTitle}
-                            </Typography>
-                            <Typography variant="caption" sx={{ color: 'text.disabled', display: 'block' }}>
-                                {fDate(art?.createdAt)}
-                            </Typography>
-                            <Box display="flex" alignItems="center">
-                                <Tooltip title="Share on Facebook">
-                                    <IconButton onClick={() => shareOnFacebook('123')}>
-                                        <FacebookIcon fontSize="small" sx={{ color: '#1877F2' }} />
-                                    </IconButton>
-                                </Tooltip>
-                                <Tooltip title="Share on Twitter">
-                                    <IconButton onClick={shareOnTwitter}>
-                                        <TwitterIcon fontSize="small" sx={{ color: '#1DA1F2' }} />
-                                    </IconButton>
-                                </Tooltip>
-                                <Tooltip title="Share on LinkedIn">
-                                    <IconButton onClick={shareOnLinkedIn}>
-                                        <LinkedInIcon fontSize="small" sx={{ color: '#0A66C2' }} />
-                                    </IconButton>
-                                </Tooltip>
-                            </Box>
-                            <div variant="body2" sx={{ color: '#757575', fontSize: '15px', textAlign: 'left' }} dangerouslySetInnerHTML={createMarkup(art?.content)}></div>
-                        </CardContent>
-                        <CardActions disableSpacing sx={{ color: '#b7410e', fontFamily: 'bold', fontSize: '15px' }}>
-                            <NextLink href={`/${art?.category}/${art?.slug}`} passHref>
-                                <Link style={{ display: 'flex', alignItems: 'center' }}>
-                                    <Typography sx={{ color: '#b7410e' }} variant="body1" component="span">
-                                        বিস্তারিত পড়ুন
-                                    </Typography>
-                                    <ExpandMoreIcon sx={{ color: '#b7410e' }} />
-                                </Link>
-                            </NextLink>
-                        </CardActions>
-                    </Card>
-                ))}
-            </Card>
+            {articles?.length === 0 && <h1>There is no Article right now!</h1>}
+            {articles.map((art, i) => (
+                // Add a unique key to the Card component
+                <Card sx={{ maxWidth: 550, marginBottom: '20px', padding: '20px', borderRadius: '2px' }} key={i}>
+                    <CardMedia
+                        component="img"
+                        height="300"
+                        image={`http://localhost:8000/${art?.cover}`}
+                        alt={`${art?.metaTitle}`}
+                        sx={{ borderRadius: '10px' }}
+                    />
+                    <CardContent>
+                        <Typography variant="h4" color="text.black">
+                            {art?.metaTitle}
+                        </Typography>
+                        <Typography variant="caption" sx={{ color: 'text.disabled', display: 'block' }}>
+                            {fDate(art?.createdAt)}
+                        </Typography>
+                        <Box display="flex" alignItems="center">
+                            <Tooltip title="Share on Facebook">
+                                <IconButton onClick={() => shareOnFacebook('123')}>
+                                    <FacebookIcon fontSize="small" sx={{ color: '#1877F2' }} />
+                                </IconButton>
+                            </Tooltip>
+                            <Tooltip title="Share on Twitter">
+                                <IconButton onClick={shareOnTwitter}>
+                                    <TwitterIcon fontSize="small" sx={{ color: '#1DA1F2' }} />
+                                </IconButton>
+                            </Tooltip>
+                            <Tooltip title="Share on LinkedIn">
+                                <IconButton onClick={shareOnLinkedIn}>
+                                    <LinkedInIcon fontSize="small" sx={{ color: '#0A66C2' }} />
+                                </IconButton>
+                            </Tooltip>
+                        </Box>
+                        <div variant="body2" sx={{ color: '#757575', fontSize: '15px', textAlign: 'left' }} dangerouslySetInnerHTML={createMarkup(art?.content.slice(0, 400))}></div>
+                    </CardContent>
+                    <CardActions disableSpacing sx={{ color: '#b7410e', fontFamily: 'bold', fontSize: '15px' }}>
+                        <NextLink href={`/${art?.category}/${art?.slug}`} passHref>
+                            <Link style={{ display: 'flex', alignItems: 'center' }}>
+                                <Typography sx={{ color: '#b7410e' }} variant="body1" component="span">
+                                    বিস্তারিত পড়ুন
+                                </Typography>
+                                <ExpandMoreIcon sx={{ color: '#b7410e' }} />
+                            </Link>
+                        </NextLink>
+                    </CardActions>
+                </Card>
+            ))}
 
 
         </>

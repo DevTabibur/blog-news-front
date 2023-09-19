@@ -1,132 +1,193 @@
-// components/Header.js
-import * as React from 'react';
-import { styled, alpha } from '@mui/material/styles';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import InputBase from '@mui/material/InputBase';
+// mui material
+import {
+    AppBar,
+    Toolbar,
+    IconButton,
+    Drawer,
+    List,
+    ListItem,
+    ListItemIcon,
+    ListItemText,
+    Typography,
+    Divider,
+    useMediaQuery,
+    Box,
+    Container,
+    Grid,
+    Paper,
+} from '@mui/material';
+// Import debounce function
+import debounce from 'lodash/debounce';
+// icon
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
-import { Container, useMediaQuery, Paper } from '@mui/material';
+import FacebookIcon from '@mui/icons-material/Facebook';
+import TwitterIcon from '@mui/icons-material/Twitter';
+import { DateTime } from 'luxon';
+// components
+import LogoImage from '../../assets/images/hindusthanTimes Bangla Logo.svg'
+import { useEffect, useState } from 'react';
+import Image from 'next/image';
 
 // custom container
-const useStyles = styled((theme) => ({
-    // container: {
-    //     padding: theme.spacing(2),
-    //     textAlign: 'center',
-    //     fontSize: '24px',
-    //     color: '#011e29',
-    // },
-    // containerSmallScreen: {
-    //     backgroundColor: '#011e29',
-    // },
-    // containerLargeScreen: {
-    //     backgroundColor: '#011e29',
-    // },
-}));
+// const useStyles = styled((theme) => ({
+//     // container: {
+//     //     padding: theme.spacing(2),
+//     //     textAlign: 'center',
+//     //     fontSize: '24px',
+//     //     color: '#011e29',
+//     // },
+//     // containerSmallScreen: {
+//     //     backgroundColor: '#011e29',
+//     // },
+//     // containerLargeScreen: {
+//     //     backgroundColor: '#011e29',
+//     // },
+// }));
 
-// for search input
-const Search = styled('div')(({ theme }) => ({
-    position: 'relative',
-    borderRadius: theme.shape.borderRadius,
-    backgroundColor: alpha(theme.palette.common.white, 0.15),
-    '&:hover': {
-        backgroundColor: alpha(theme.palette.common.white, 0.25),
-    },
-    marginLeft: 0,
-    width: '100%',
-    [theme.breakpoints.up('sm')]: {
-        marginLeft: theme.spacing(1),
-        width: 'auto',
-    },
-}));
-
-const SearchIconWrapper = styled('div')(({ theme }) => ({
-    padding: theme.spacing(0, 2),
-    height: '100%',
-    position: 'absolute',
-    pointerEvents: 'none',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-}));
-
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-    color: 'inherit',
-    '& .MuiInputBase-input': {
-        padding: theme.spacing(1, 1, 1, 0),
-        paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-        transition: theme.transitions.create('width'),
-        width: '100%',
-        [theme.breakpoints.up('sm')]: {
-            width: '4ch',
-            '&:focus': {
-                width: '4ch',
-            },
-        },
-    },
-    // Additional styles for small screens
-    [theme.breakpoints.down('sm')]: {
-        '& .MuiInputBase-input': {
-            width: '10%', // Full width on small screens
-        },
-    },
-}));
 
 const BlogNavComponents = () => {
+    const [drawerOpen, setDrawerOpen] = useState(false);
+    // for app bar height decrease according to scrolling down
+    const [appBarHeight, setAppBarHeight] = useState(130);
     const isMobile = useMediaQuery((theme) => theme.breakpoints.down('sm'));
-    // for custom container
-    const classes = useStyles();
-    const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down('sm'));
+
+    // useEffect(() => {
+    //     const handleScroll = () => {
+    //         if (window.scrollY > 100) {
+    //             setAppBarHeight(100);
+    //         } else {
+    //             setAppBarHeight(130);
+    //         }
+    //     };
+
+    //     window.addEventListener('scroll', handleScroll);
+
+    //     return () => {
+    //         window.removeEventListener('scroll', handleScroll);
+    //     };
+    // }, []);
+
+    
+
+    const toggleDrawer = () => {
+        setDrawerOpen(!drawerOpen);
+    };
+
     return (
         <>
-            <Box sx={{ flexGrow: 1, marginBottom: '32px' }}>
-                <AppBar position="static" sx={{ height: 100, backgroundColor: '#011e29' }}>
-                    <Container sx={{ mt: '20px', mb: '20px', textAlign: 'center', justifyContent: "center" }}>
-                        <Toolbar sx={{ minHeight: 90, mb: '20px' }}>
-                            <IconButton
-                                size="large"
-                                edge="start"
-                                color="inherit"
-                                aria-label="menu"
-                                sx={{ mr: 2 }}
-                            >
-                                <MenuIcon />
-                            </IconButton>
-                            <Typography variant="h6" component="div" sx={{ flexGrow: 1, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                                Blog NEWS
-                            </Typography>
-                            <Search>
-                                <SearchIconWrapper>
-                                    <SearchIcon />
-                                </SearchIconWrapper>
-                                <StyledInputBase
-                                    placeholder="Search…"
-                                    inputProps={{ 'aria-label': 'search' }}
-                                    sx={{
-                                        width: isMobile ? '100%' : '12ch', // Adjust width for small screens
-                                        '& .MuiInputBase-input': {
-                                            width: isMobile ? '100%' : '12ch', // Adjust input width for small screens
-                                            '&:focus': {
-                                                width: isMobile ? '100%' : '12ch', // Adjust focus width for small screens
-                                            },
-                                        },
-                                    }}
-                                />
-                            </Search>
-                        </Toolbar>
-                    </Container>
-                </AppBar>
-            </Box>
+            <AppBar
+                position="sticky"
+                elevation={4}
+                sx={{ backgroundColor: '#fff', height: appBarHeight, marginBottom: '70px', transition: 'height 0.3s ease', }}
+            >
+                <Container
+                    sx={{
+                        textAlign: 'center',
+                        justifyContent: 'center',
+                        display: 'flex',
+                        height: appBarHeight,
+                        ms: '0px',
+                        me: '0px'
+                    }}
+                >
+                    <Box
+                        sx={{
+                            width: '33.3%',
+                            display: 'flex',
+                            justifyContent: 'flex-start',
+                            alignItems: 'center',
+                        }}
+                    >
+                        <IconButton
+                            onClick={toggleDrawer}
+                            edge="start"
+                            color="inherit"
+                            aria-label="menu"
+                            sx={{ color: 'black' }}
+                        >
+                            <MenuIcon />
+                        </IconButton>
+                    </Box>
+
+
+                    <Box
+
+                        sx={{
+                            width: '33.3%',
+                            display: 'flex',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                        }}
+                    >
+                        <Image
+                            src={LogoImage}
+                            alt="Your Logo"
+                            width={isMobile ? 100 : 150}
+                            height={isMobile ? 'auto' : 140}
+                        />
+                    </Box>
+                    <Box
+                        sx={{
+                            width: '33.3%',
+                            display: 'flex',
+                            justifyContent: 'flex-end',
+                            alignItems: 'center',
+                        }}
+                    >
+                        <Box>
+                            <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                                <IconButton>
+                                    <SearchIcon color="primary" />
+                                </IconButton>
+                                {!isMobile && (
+                                    <>
+                                        <IconButton>
+                                            <FacebookIcon style={{ color: '#1877F2' }} />
+                                        </IconButton>
+                                        <IconButton>
+                                            <TwitterIcon style={{ color: '#1DA1F2' }} />
+                                        </IconButton>
+                                    </>
+                                )}
+                            </Box>
+                            {!isMobile && (
+                                <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                                    <Typography variant="body2">
+                                        {DateTime.now().toLocaleString(DateTime.DATETIME_MED)}
+                                    </Typography>
+                                </Box>
+                            )}
+                        </Box>
+                    </Box>
+                </Container>
+
+                <Drawer anchor="left" open={drawerOpen} onClose={toggleDrawer}>
+                    <div style={{ width: 250 }}>
+                        <List>
+                            <ListItem button>
+                                <ListItemIcon>
+                                </ListItemIcon>
+                                <ListItemText primary="Menu Item 1" />
+                            </ListItem>
+                            <ListItem button>
+                                <ListItemIcon>
+                                </ListItemIcon>
+                                <ListItemText primary="Menu Item 2" />
+                            </ListItem>
+                        </List>
+                    </div>
+                </Drawer>
+            </AppBar>
+
+
+
+
 
 
         </>
+
     );
-
-
-
 
 }
 

@@ -13,7 +13,7 @@ const NewsLayout = ({ children }) => {
         <>
             <div>
 
-                <AdPositioning1Components />
+                {/* <AdPositioning1Components /> */}
                 <BlogNavComponents />
                 <Container>
                     <Grid container spacing={4}>

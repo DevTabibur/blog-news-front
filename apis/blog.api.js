@@ -21,3 +21,14 @@ export const deleteArticle = async (id) => {
         toast.error(error)
     }
 }
+
+
+export const fetchArticleBySlug = async (category, slug) => {
+    try {
+        const res = await axios.get(`${BLOG_URL}/${category}/${slug}`)
+        return res?.data
+
+    } catch (error) {
+        toast.error(error)
+    }
+}

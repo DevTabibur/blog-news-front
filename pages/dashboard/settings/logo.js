@@ -1,6 +1,7 @@
 import DashboardLayout from "@/components/DashboardLayout/DashboardLayout"
 import HeaderBreadcrumbs from "@/components/HeaderBreadcrumbs"
 import Page from "@/components/Page"
+import UploadLogoFormPage from "@/components/_dashboard/settings/uploadLogoForm"
 import { Container } from "@mui/material"
 import { PATH_DASHBOARD } from "routes/paths"
 import RoleBasedGuard from "src/Guards/RoleBasedGuard"
@@ -22,7 +23,7 @@ const LogoPage = () => {
                                     { name: 'Upload a Logo', href: PATH_DASHBOARD.settings.logo },
                                 ]}
                             />
-                            <h1>Logo Page</h1>
+                            <UploadLogoFormPage />
                         </Container>
                     </RoleBasedGuard>
                 </Page>

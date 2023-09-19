@@ -4,12 +4,9 @@ import { useRouter } from 'next/router';
 // material
 import { Box, Card, Divider, Skeleton, Container, Typography, Pagination } from '@mui/material';
 // redux
-// import { useDispatch, useSelector } from '../../redux/store';
-// import { getPost, getRecentPosts } from '../../redux/slices/blog';
 // routes
 import { PATH_DASHBOARD } from 'routes/paths';
 // hooks
-import useSettings from 'hooks/useSettings';
 // components
 import Page from 'components/Page';
 import Markdown from '@/components/Markdown';
@@ -21,9 +18,9 @@ import {
     BlogPostCommentList,
     BlogPostCommentForm
 } from 'components/_dashboard/blog';
-import { useDispatch, useSelector } from 'react-redux';
-import RoleBasedGuard from '../../src/Guards/RoleBasedGuard';
 import DashboardLayout from '@/components/DashboardLayout/DashboardLayout';
+import useSettings from 'src/hooks/useSettings';
+import RoleBasedGuard from 'src/Guards/RoleBasedGuard';
 
 
 // ----------------------------------------------------------------------
@@ -44,16 +41,10 @@ const SkeletonLoad = (
 
 export default function BlogPost() {
     const { themeStretch } = useSettings();
-    const dispatch = useDispatch();
     // const { title } = useRouter();
     // const { post, error, recentPosts } = useSelector((state) => state.blog);
-
     const post = 'hi hello';
     const recentPosts = 'recent posts';
-    // useEffect(() => {
-    //     dispatch(getPost(title));
-    //     dispatch(getRecentPosts(title));
-    // }, [dispatch, title]);
     const title = 'abc dummy title'
 
     return (
