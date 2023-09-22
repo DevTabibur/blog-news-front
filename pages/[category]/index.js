@@ -1,4 +1,3 @@
-import NewsLayout from '@/components/News Pages/NewsLayout'
 
 import { useRouter } from 'next/router'
 import Box from '@mui/material/Box';
@@ -12,14 +11,16 @@ import IconButton from '@mui/material/IconButton';
 import { CardMedia } from '@mui/material';
 import Image from 'next/image';
 import NextLink from 'next/link'
+import RootLayout from '@/components/layouts/RootLayout';
 
 const CategoryPage = () => {
     const router = useRouter()
     const { category } = router.query;
     return (
         <>
-            <Page title={`${category} | Blog News`}>
-                <NewsLayout>
+
+            <Page title="Blog News">
+                <RootLayout>
 
 
                     <Card sx={{ mb: '10px' }}>
@@ -40,10 +41,10 @@ const CategoryPage = () => {
                                     height={100}
                                     alt="Picture of the author"
                                 />
-                                <Box sx={{  alignItems: 'center', pl: 2, pb: 1 }}>
-                                    <Typography sx={{mb:'18px'}}>
-                                    <NextLink href={`/${category}/sl-vs-pak`}>
-                                        SL vs PAK Asia Cup 2023: শেষ বলে রুদ্ধশ্বাস জয়, পাকিস্তানকে ছিটকে দিয়ে এশিয়া কাপের ফাইনালে শ্রীলঙ্কা
+                                <Box sx={{ alignItems: 'center', pl: 2, pb: 1 }}>
+                                    <Typography sx={{ mb: '18px' }}>
+                                        <NextLink href={`/${category}/sl-vs-pak`}>
+                                            SL vs PAK Asia Cup 2023: শেষ বলে রুদ্ধশ্বাস জয়, পাকিস্তানকে ছিটকে দিয়ে এশিয়া কাপের ফাইনালে শ্রীলঙ্কা
                                         </NextLink>
                                     </Typography>
                                     <Typography >
@@ -57,7 +58,7 @@ const CategoryPage = () => {
 
 
 
-                </NewsLayout>
+                </RootLayout>
             </Page>
         </>
     )

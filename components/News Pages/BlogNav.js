@@ -15,6 +15,7 @@ import {
     Container,
     Grid,
     Paper,
+    styled,
 } from '@mui/material';
 // Import debounce function
 import debounce from 'lodash/debounce';
@@ -28,22 +29,15 @@ import { DateTime } from 'luxon';
 import LogoImage from '../../assets/images/hindusthanTimes Bangla Logo.svg'
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
+import dynamic from 'next/dynamic';
+import Link from 'next/link';
 
 // custom container
-// const useStyles = styled((theme) => ({
-//     // container: {
-//     //     padding: theme.spacing(2),
-//     //     textAlign: 'center',
-//     //     fontSize: '24px',
-//     //     color: '#011e29',
-//     // },
-//     // containerSmallScreen: {
-//     //     backgroundColor: '#011e29',
-//     // },
-//     // containerLargeScreen: {
-//     //     backgroundColor: '#011e29',
-//     // },
-// }));
+// const CustomContainer = styled('div')({
+//     width: '1560px', // Set your custom width here
+//     margin: '0 auto', // Center the container horizontally
+// });
+
 
 
 const BlogNavComponents = () => {
@@ -68,7 +62,7 @@ const BlogNavComponents = () => {
     //     };
     // }, []);
 
-    
+
 
     const toggleDrawer = () => {
         setDrawerOpen(!drawerOpen);
@@ -120,12 +114,15 @@ const BlogNavComponents = () => {
                             alignItems: 'center',
                         }}
                     >
-                        <Image
-                            src={LogoImage}
-                            alt="Your Logo"
-                            width={isMobile ? 100 : 150}
-                            height={isMobile ? 'auto' : 140}
-                        />
+                        <Link href={'/'}>
+
+                            <Image
+                                src={LogoImage}
+                                alt="Your Logo"
+                                width={isMobile ? 100 : 150}
+                                height={isMobile ? 'auto' : 140}
+                            />
+                        </Link>
                     </Box>
                     <Box
                         sx={{
@@ -178,7 +175,8 @@ const BlogNavComponents = () => {
                         </List>
                     </div>
                 </Drawer>
-            </AppBar>
+            </AppBar >
+
 
 
 
@@ -191,4 +189,4 @@ const BlogNavComponents = () => {
 
 }
 
-export default BlogNavComponents
+export default dynamic(() => Promise.resolve(BlogNavComponents), { ssr: false })

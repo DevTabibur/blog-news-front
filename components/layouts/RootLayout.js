@@ -1,24 +1,19 @@
-import { Container, Grid, styled, useMediaQuery } from "@mui/material";
-import NewsLeftCategoryStyleComponents from "./NewsLeftCategoryStyle";
-import NewsDataCardComponents from "./NewsDataCard";
-import AdPositioning1Components from "../AdPositioning/AdPositioning1";
-import BlogNavComponents from "./BlogNav";
-
-
-
-const NewsLayout = ({ children }) => {
+import { Container, Grid, useMediaQuery } from '@mui/material';
+import BlogNavComponents from '../News Pages/BlogNav';
+import NewsLeftCategoryStyleComponents from '../News Pages/NewsLeftCategoryStyle';
+import Page from '../Page';
+const RootLayout = ({ children }) => {
     const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down('sm'));
     const isTabletScreen = useMediaQuery((theme) => theme.breakpoints.down('md'));
     return (
         <>
-            <div>
-
+            <Page title="Blog News">
                 {/* <AdPositioning1Components /> */}
                 <BlogNavComponents />
                 <Container>
-                    <Grid container spacing={4}>
+                    <Grid container spacing={2}>
                         {!isSmallScreen && (
-                            <Grid item xs={3}>
+                            <Grid sx={{ mt: '0px`' }} item xs={3}>
                                 <NewsLeftCategoryStyleComponents />
                             </Grid>
                         )}
@@ -32,9 +27,9 @@ const NewsLayout = ({ children }) => {
                         )}
                     </Grid>
                 </Container>
-            </div>
+            </Page>
         </>
     )
 }
 
-export default NewsLayout
+export default RootLayout

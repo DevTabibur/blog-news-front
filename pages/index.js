@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react';
 import LoadingScreen from '@/components/LoadingScreen';
 import BlogNavComponents from '@/components/News Pages/BlogNav';
 import AdPositioning1Components from '@/components/AdPositioning/AdPositioning1';
-import NewsLayout from '@/components/News Pages/NewsLayout';
 import NextLink from 'next/link'
 import NewsDataCardComponents from '@/components/News Pages/NewsDataCard';
 import { BLOG_URL } from 'apis/url';
+import RootLayout from '@/components/layouts/RootLayout';
 
 const Index = ({ articles }) => {
     // console.log('articles', articles);
@@ -24,9 +24,9 @@ const Index = ({ articles }) => {
             ) : (
                 <>
                     <div style={{backgroundColor:"#f6f6f6"}}>
-                        <NewsLayout >
+                        <RootLayout>
                             <NewsDataCardComponents articles={articles}></NewsDataCardComponents>
-                        </NewsLayout>
+                        </RootLayout>
                     </div>
                 </>
             )}

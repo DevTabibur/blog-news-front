@@ -149,6 +149,9 @@ const NewsDataCardComponents = ({ articles }) => {
                         <Typography variant="caption" sx={{ color: 'text.disabled', display: 'block' }}>
                             {fDate(art?.createdAt)}
                         </Typography>
+                        <Typography variant="caption" sx={{ color: 'text.disabled', display: 'block' }}>
+                            {art?.readingTime} মিনিটে পড়ুন 
+                        </Typography>
                         <Box display="flex" alignItems="center">
                             <Tooltip title="Share on Facebook">
                                 <IconButton onClick={() => shareOnFacebook('123')}>

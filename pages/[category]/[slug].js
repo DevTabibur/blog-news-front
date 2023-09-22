@@ -1,4 +1,3 @@
-import NewsLayout from "@/components/News Pages/NewsLayout";
 import { fDate } from '@/utils/formatTime';
 import { Box, Card, CardActions, CardContent, CardMedia, IconButton, Link, Tooltip, Typography } from "@mui/material";
 import { fetchArticleBySlug, getAllArticles } from "apis/blog.api";
@@ -11,6 +10,7 @@ import NextLink from 'next/link'
 import FacebookIcon from '@mui/icons-material/Facebook';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import RootLayout from '@/components/layouts/RootLayout';
 
 
 const BlogDetailsPage = ({ article }) => {
@@ -38,7 +38,7 @@ const BlogDetailsPage = ({ article }) => {
   return (
     <>
 
-      <NewsLayout>
+      <RootLayout>
         <Card sx={{ maxWidth: 550, padding: '10px', marginBottom: '20px' }}>
 
           <CardMedia
@@ -75,7 +75,7 @@ const BlogDetailsPage = ({ article }) => {
           </CardContent>
 
         </Card>
-      </NewsLayout>
+      </RootLayout>
     </>
   )
 }
