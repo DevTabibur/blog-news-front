@@ -68,7 +68,7 @@ export default function RegisterForm() {
               localStorage.setItem('accessToken', data?.data?.accessToken)
               // localStorage.setItem('role', data?.data?.data?.role);
               // Use router.push with a callback function to reload the page after navigation
-              router.push('/', undefined, { shallow: true }).then(() => {
+              router.push('/dashboard', undefined, { shallow: true }).then(() => {
                 window.location.reload();
               });
             }

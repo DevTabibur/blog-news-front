@@ -67,7 +67,8 @@ export default function LoginForm() {
               localStorage.setItem('accessToken', data?.data?.accessToken)
               
               // Redirect to the previous page
-              window.location.replace(document.referrer);
+              // window.location.replace(document.referrer);
+              router.push('/dashboard')
 
               // showing the success message
               toast.success('Login Successful')

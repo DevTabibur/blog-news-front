@@ -49,5 +49,14 @@ export const PATH_DASHBOARD = {
         websiteName: path(ROOTS_DASHBOARD, '/settings/website-name'),
         logo: path(ROOTS_DASHBOARD, '/settings/logo'),
         favicon: path(ROOTS_DASHBOARD, '/settings/favicon'),
-    }
+    },
+    stuffing: {
+        root: path(ROOTS_DASHBOARD, '/stuffing'),
+        list: path(ROOTS_DASHBOARD, '/stuffing/list'),
+        createStuff: path(ROOTS_DASHBOARD, '/stuffing/create-stuff'),
+    },
+    adPlacing: {
+        root: path(ROOTS_DASHBOARD, '/ad-place'),
+        createAd: path(ROOTS_DASHBOARD, '/stuffing/create-ad-place'),
+    },
 };

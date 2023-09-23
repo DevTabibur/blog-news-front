@@ -5,6 +5,7 @@ import dynamic from 'next/dynamic';
 import { Card, FormHelperText, Grid, Stack, Typography, styled } from '@mui/material';
 import { UploadSingleFile } from '@/components/upload';
 import { LoadingButton } from '@mui/lab';
+import { uploadFavIcon } from 'apis/settings.api';
 
 
 const LabelStyle = styled(Typography)(({ theme }) => ({
@@ -14,24 +15,25 @@ const LabelStyle = styled(Typography)(({ theme }) => ({
 }));
 
 const FavIconFormPage = () => {
-    const [coverImage, setCoverImage] = useState(null)
+    const [favIcon, setFavIcon] = useState(null)
     const [logo, setLogo] = useState([])
 
     const NewBlogSchema = Yup.object().shape({
-        logo: Yup.mixed().required('Logo is required')
+        favIcon: Yup.mixed().required('Fav Icon is required')
     });
 
     const formik = useFormik({
         initialValues: {
-            logo: null
+            favIcon: null
         },
         validationSchema: NewBlogSchema,
         onSubmit: async (values, { setSubmitting, resetForm }) => {
             try {
                 const formData = new FormData();
-                formData.append('logo', coverImage);
+                formData.append('favIcon', favIcon);
+                console.log('favIcon', favIcon);
 
-                const res = await uploadLogo(formData)
+                const res = await uploadFavIcon(formData)
                 // console.log('res', res);
                 if (res?.statusCode === 200) {
                     toast.success(res?.message)
@@ -41,7 +43,7 @@ const FavIconFormPage = () => {
                 }
 
             } catch (error) {
-                console.error('logo upload is failed error', error);
+                console.error('favIcon upload is failed error', error);
 
             }
         }
@@ -53,23 +55,14 @@ const FavIconFormPage = () => {
         (acceptedFiles) => {
             const file = acceptedFiles[0];
             if (file) {
-                setCoverImage(file)
-                setFieldValue('logo', {
+                setFavIcon(file)
+                setFieldValue('favIcon', {
                     ...file,
                     preview: URL.createObjectURL(file)
                 });
             }
         },
         [setFieldValue])
-
-    // useEffect(() => {
-    //     const retrieveLogo = async () => {
-    //         const res = await currentLogo()
-    //         setLogo(res?.data)
-    //         return res?.data
-    //     }
-    //     retrieveLogo()
-    // }, [])
     return (
         <>
             {/* <div style={{ marginBottom: '20px', }}>
@@ -90,16 +83,16 @@ const FavIconFormPage = () => {
                                     <div>
                                         <LabelStyle>Upload Logo</LabelStyle>
                                         <UploadSingleFile
-                                            name="favicon"
+                                            name="favIcon"
                                             maxSize={3145728}
                                             accept="image/*"
-                                            file={values.logo}
+                                            file={values.favIcon}
                                             onDrop={handleDrop}
-                                            error={Boolean(touched.logo && errors.logo)}
+                                            error={Boolean(touched.favIcon && errors.favIcon)}
                                         />
-                                        {touched.logo && errors.logo && (
+                                        {touched.favIcon && errors.favIcon && (
                                             <FormHelperText error sx={{ px: 2 }}>
-                                                {touched.logo && errors.logo}
+                                                {touched.favIcon && errors.favIcon}
                                             </FormHelperText>
                                         )}
                                     </div>

@@ -1,7 +1,7 @@
 
 import { useEffect, useState } from 'react';
 import HomeIcon from '@mui/icons-material/Home';
-// import { usePathname } from 'next/navigation';
+import { usePathname } from 'next/navigation'
 import NextLink from 'next/link'
 import { getAllCategory } from 'apis/category.api';
 
@@ -19,12 +19,14 @@ import ContentCopy from '@mui/icons-material/ContentCopy';
 import ContentPaste from '@mui/icons-material/ContentPaste';
 import Cloud from '@mui/icons-material/Cloud';
 import { alpha } from '@mui/material/styles';
-import { AppBar, Link, List, ListItem, Tab, Tabs, Toolbar } from '@mui/material';
+import { AppBar, List, Link, ListItem, Tab, Tabs, Toolbar } from '@mui/material';
+import { useRouter } from 'next/router';
 
 const NewsLeftCategoryStyleComponents = () => {
-    const [activeLink, setActiveLink] = useState('');
-
+    const [isActive, setIsActive] = useState(false);
+    const { asPath } = useRouter();
     const [categories, setCategories] = useState([])
+    const pathname = usePathname()
 
     useEffect(() => {
         const getCategory = async () => {
@@ -43,13 +45,22 @@ const NewsLeftCategoryStyleComponents = () => {
     //     '&:before': { display: 'block' }
     // };
 
-    {/* Get the current route */ }
-    // useEffect(() => {
-    //     return currentRoute = usePathname();
-    //     console.log('currentRoute', currentRoute);
-    // }, [usePathname])
+    // Get the current route path from Next.js router
 
-    console.log('categories', categories);
+
+    // Check if the link's href matches the current route path
+
+    useEffect(() => {
+        if (asPath === pathname) {
+            setIsActive(true)
+        }
+    }, [asPath]);
+
+    console.log('asPath', asPath);
+    console.log('pathname', pathname);
+    console.log('isActive', isActive);
+
+
 
     return (
         <>

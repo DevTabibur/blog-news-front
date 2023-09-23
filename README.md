@@ -47,3 +47,4 @@ eita ashtese, server off hoi gele ashtese...
 13. jwt expiresTime rakhbo na. cancel kore dibo backend theke. jwtHelpers er moddhe ase
 14. register + login sob ee hosse valo vabe. but password change kora pore, change holeu, password is not matched error ashtese. jeta big issue
 15. sob kisu production level e upload korar pore, database a websiteName ta by default example name set kore dite hobe. otherwise, website name update kora jabe na, bug dekha dibe
+16. AVIF file 25kb te upload korar system add korte hbe..

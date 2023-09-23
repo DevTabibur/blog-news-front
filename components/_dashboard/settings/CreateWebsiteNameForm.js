@@ -4,14 +4,13 @@ import { Form, FormikProvider, useFormik } from 'formik';
 import dynamic from 'next/dynamic';
 import { Card, Grid, Stack, TextField } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
-import {  getWebsiteName, updateWebsiteName } from 'apis/settings.api';
+import {  createWebsiteName, getWebsiteName } from 'apis/settings.api';
 import toast from 'react-hot-toast';
 
 
 
 const CreateWebsiteNameForm = () => {
     const [websiteName, setWebsiteName] = useState('')
-    const currentWebsiteNameID = websiteName?._id
     
     useEffect(() => {
         const GetWebsiteNameFunction = async () => {
@@ -38,7 +37,7 @@ const CreateWebsiteNameForm = () => {
                     websiteName: values?.websiteName,
                 }
 
-                const data = await updateWebsiteName(postData, currentWebsiteNameID)
+                const data = await createWebsiteName(postData)
                 if (data?.statusCode === 200) {
                     toast.success(data?.message)
                     resetForm()
@@ -76,7 +75,7 @@ const CreateWebsiteNameForm = () => {
                                 </Stack>
                                 <Stack direction="row" justifyContent="flex-end" sx={{ mt: 3 }}>
                                     <LoadingButton fullWidth type="submit" variant="contained" size="large" loading={isSubmitting}>
-                                        UPDATE WEBSITE NAME
+                                        SUBMIT WEBSITE NAME
                                     </LoadingButton>
                                 </Stack>
                             </Card>

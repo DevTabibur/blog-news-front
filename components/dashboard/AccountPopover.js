@@ -28,11 +28,7 @@ import { ContextData } from 'src/contexts/dataProviderContext';
 export default function AccountPopover() {
     const anchorRef = useRef(null)
     const { currentlyLoggedIn, setUpdate } = useContext(ContextData)
-    // const { role, email, name, image } = currentlyLoggedIn || {}
-    const image = `https://w7.pngwing.com/pngs/340/946/png-transparent-avatar-user-computer-icons-software-developer-avatar-child-face-heroes.png`;
-    const name = 'ACcoutn NAme Popover';
-    const role = 'Admin';
-    const email = `dummy@gmail.com`;
+    const { role, email, name, image } = currentlyLoggedIn || {}
     const router = useRouter()
     const [open, setOpen] = useState(false)
 

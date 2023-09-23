@@ -55,12 +55,31 @@ const sidebarConfig = [
             // MANAGEMENT : SETTINGS
             {
                 title: 'Settings',
-                path: PATH_DASHBOARD.blog.root,
+                path: PATH_DASHBOARD.settings.root,
                 icon: ICONS.dashboard,
                 children: [
                     { title: 'website name', path: PATH_DASHBOARD.settings.websiteName },
                     { title: 'Logo', path: PATH_DASHBOARD.settings.logo, },
                     { title: 'fav icon', path: PATH_DASHBOARD.settings.favicon, }
+                ]
+            },
+            // MANAGEMENT : STUFFING
+            {
+                title: 'Stuffing',
+                path: PATH_DASHBOARD.stuffing.root,
+                icon: ICONS.user,
+                children: [
+                    { title: 'Stuffing List', path: PATH_DASHBOARD.stuffing.list },
+                    { title: 'Create Stuff', path: PATH_DASHBOARD.stuffing.createStuff, },
+                ]
+            },
+            // MANAGEMENT : AD PLACING
+            {
+                title: 'Ad Placing',
+                path: PATH_DASHBOARD.adPlacing.root,
+                icon: ICONS.banking,
+                children: [
+                    { title: 'Create Ad', path: PATH_DASHBOARD.adPlacing.createAd, },
                 ]
             },
 

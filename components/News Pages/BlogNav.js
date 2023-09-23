@@ -31,6 +31,7 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
+import { currentLogo } from 'apis/settings.api';
 
 // custom container
 // const CustomContainer = styled('div')({
@@ -42,6 +43,7 @@ import Link from 'next/link';
 
 const BlogNavComponents = () => {
     const [drawerOpen, setDrawerOpen] = useState(false);
+    const [logo, setLogo] = useState([])
     // for app bar height decrease according to scrolling down
     const [appBarHeight, setAppBarHeight] = useState(130);
     const isMobile = useMediaQuery((theme) => theme.breakpoints.down('sm'));
@@ -67,6 +69,18 @@ const BlogNavComponents = () => {
     const toggleDrawer = () => {
         setDrawerOpen(!drawerOpen);
     };
+
+    // get current logo
+    useEffect(() => {
+        const getCurrentLogo = async () => {
+            const logo = await currentLogo()
+            setLogo(logo?.data[0].logo)
+            return logo?.data
+        }
+        getCurrentLogo()
+    }, [])
+
+    console.log('logo', logo);
 
     return (
         <>
@@ -117,10 +131,10 @@ const BlogNavComponents = () => {
                         <Link href={'/'}>
 
                             <Image
-                                src={LogoImage}
+                                src={`http://localhost:8000/${logo}`}
                                 alt="Your Logo"
                                 width={isMobile ? 100 : 150}
-                                height={isMobile ? 'auto' : 140}
+                                height={isMobile ? 100 : 140}
                             />
                         </Link>
                     </Box>
